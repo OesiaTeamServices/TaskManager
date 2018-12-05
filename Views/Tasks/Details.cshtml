@@ -1,0 +1,102 @@
+@model Oesia.Models.Task
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Task</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaskId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Criticality)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Criticality)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Priority)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Priority)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedStartDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedStartDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedEndDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedEndDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RealStartDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RealStartDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RealEndDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RealEndDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedHours)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedHours)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ElapsedHours)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ElapsedHours)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PendingHours)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PendingHours)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

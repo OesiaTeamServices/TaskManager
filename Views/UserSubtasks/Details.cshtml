@@ -1,0 +1,42 @@
+@model Oesia.Models.UserSubtask
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserSubtask</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlayTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PauseTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PauseTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StopTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StopTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RecordTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RecordTime)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

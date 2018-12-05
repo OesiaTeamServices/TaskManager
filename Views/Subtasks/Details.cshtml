@@ -1,0 +1,66 @@
+@model Oesia.Models.Subtask
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Subtask</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubtaskId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SubtaskId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedHours)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedHours)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ElapsedHours)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ElapsedHours)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PendingHours)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PendingHours)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Observations)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Observations)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
