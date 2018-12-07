@@ -12,18 +12,79 @@
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Projects.ProjectId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Projects.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Projects.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Projects.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Projects.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Projects.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Projects.EstimatedHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Projects.ElapsedHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Projects.PendingHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Projects.Status)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Projects.ProjectId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Projects.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Projects.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Projects.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Projects.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Projects.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Projects.EstimatedHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Projects.ElapsedHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Projects.PendingHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Projects.Status)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
