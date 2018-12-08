@@ -35,3 +35,9 @@ body {
         display: none;
     }
 }
+
+.footerPar{
+    position:fixed;
+    position:center;
+    bottom: 0%;
+}

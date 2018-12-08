@@ -6,14 +6,24 @@
     }
 }
 
+class Button extends React.Component {
+    render() {
+        return (
+            <button name="SubmitBtn">Submit</button>
+        );
+    }
+}
+
+
+
 class CommentBox extends React.Component {
     render() {
         return (
             <div>
+                <Header />
                 <InputBox type="text" message="your name" />
                 <InputBox type="password" message="your password" />
-                <Header />
-                <Footer />
+                <Button />
 
             </div>
         );
@@ -32,15 +42,15 @@ class Header extends React.Component {
     }
 }
 
-class Footer extends React.Component {
-    render() {
-        return (
-            <footer>
-                <p className="footerPar"> ©GRUPO OESÍA 2018. ALL RIGHTS RESERVED.</p>
-            </footer>
+//class Footer extends React.Component {
+//    render() {
+//        return (
+//            <footer>
+//                <p className="footerPar"> ©GRUPO OESÍA 2018. ALL RIGHTS RESERVED.</p>
+//            </footer>
 
-        );
-    }
-}
+//        );
+//    }
+//}
 
 ReactDOM.render(<CommentBox />, document.getElementById('content'));
