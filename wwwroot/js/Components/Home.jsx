@@ -9,7 +9,7 @@
 class Button extends React.Component {
     render() {
         return (
-            <button name="SubmitBtn">Submit</button>
+            <button name="SubmitBtn">Log In</button>
         );
     }
 }
