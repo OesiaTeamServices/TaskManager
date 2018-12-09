@@ -30,9 +30,13 @@ namespace Oesia.Controllers
         // GET: ProjectsJSON
         [Route("ProjectsJson")]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> ProjectsJson()
+        //public async Task<IActionResult> ProjectsJson()
+        //{
+        //    return Json(await _context.Project.ToListAsync());
+        //}
+        public ActionResult ProjectsJson()
         {
-            return Json(await _context.Project.ToListAsync());
+            return Json(_context.Project);
         }
 
         // GET: Projects/Details/5
