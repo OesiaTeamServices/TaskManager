@@ -42,8 +42,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Projects.Status)
             </th>
-            @*if you want to access subtasks from projects:
-            Html.DisplayNameFor(model => model.Projects.Modules[].Submodules[].Tasks[].Subtasks)*@
             <th></th>
         </tr>
     </thead>
@@ -82,7 +80,8 @@
                     @Html.DisplayFor(modelItem => item.Projects.Status)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Projects.Modules[].Submodules[].Tasks[].Subtasks)
+                    @*if you want to access subtasks from projects:
+        Html.DisplayNameFor(model => model.Projects.Modules[].Submodules[].Tasks[].Subtasks)*@
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
