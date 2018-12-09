@@ -3,20 +3,10 @@
             super(props);
             this.state = {
                 data: []
+                //filteredHeader: data[0]
             };
             //this.loadDataFromServer = this.loadDataFromServer.bind(this);
         }
-
-        ////componentWillMount() {
-        ////    const xhr = new XMLHttpRequest();
-        ////    xhr.open('get', this.props.url, true);
-        ////    xhr.onload = () => {
-        ////        const data = JSON.parse(xhr.responseText);
-        ////        this.setState({ data: data });
-        ////    };
-        ////    xhr.send();
-        ////    console.log(data);
-        ////}
 
         loadDataFromServer() {
             const xhr = new XMLHttpRequest();
@@ -35,24 +25,47 @@
         componentDidMount() {
             this.loadDataFromServer();
         }
-        render() {
+
+    render() {
+        //let filteredHeader = data[0];
+        //console.log(filetredHeader);
             return (
                 <div className="commentBox">
                     <h1>Projects</h1>
                     <table>
                         <colgroup span="4"></colgroup>
-                        <tbody>
-                            <TableRowHeader />
-                            <TableRow />
-                            <TableRow />
-                            <TableRow />
-                            <TableRow />
-                            <TableRow />
-                            <TableRow />
-                            <TableRow />
-                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>Project ID</th>
+                                <th>Description</th>
+                                <th>User ID</th>
+                                <th>Create Date</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Estimated Hours</th>
+                                <th>Elapsed Hours</th>
+                                <th>Pending Hours</th>
+                                <th>Status</th>
+                            </tr>
+                       </thead>
+                        <tbody>{this.state.data.map(function (item, key) {
+
+                            return (
+                                <tr key={key}>                                 
+                                    <td>{item.projectId}</td>
+                                    <td>{item.description}</td>
+                                    <td>{item.userId}</td>
+                                    <td>{item.createDate}</td>
+                                    <td>{item.startDate}</td>
+                                    <td>{item.endDate}</td>
+                                    <td>{item.estimatedHours}</td>
+                                    <td>{item.elapsedHours}</td>
+                                    <td>{item.pendingHours}</td>
+                                    <td>{item.status}</td>
+                                </tr>
+                            )
+                        })}</tbody>
                     </table>
-                    <CommentList data={this.state.data} />
                 </div>
             );
         }
@@ -63,11 +76,6 @@ class TableRowHeader extends React.Component {
         return (
             <tr>
                 <TableHeader />
-                <TableHeader />
-                <TableHeader />
-                <TableHeader />
-                <TableHeader />
-                <TableHeader />
             </tr>
         );
     }
@@ -77,11 +85,6 @@ class TableRow extends React.Component {
     render() {
         return (
             <tr>
-                <TableData />
-                <TableData />
-                <TableData />
-                <TableData />
-                <TableData />
                 <TableData />
             </tr>
         );
