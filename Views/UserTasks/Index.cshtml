@@ -9,21 +9,6 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<table class="table">     <thead>         <tr>             <th>                 @Html.DisplayNameFor(model => model.Tasks.TaskId)             </th>             <th>                 @Html.DisplayNameFor(model => model.Tasks.Description)             </th>             <th>                 @Html.DisplayNameFor(model => model.Tasks.Type)             </th>             <th>                 @Html.DisplayNameFor(model => model.Tasks.Criticality)             </th>             <th>                 @Html.DisplayNameFor(model => model.Tasks.Priority)             </th>             <th>                 @Html.DisplayNameFor(model => model.Tasks.CreateDate)             </th>             <th>                 @Html.DisplayNameFor(model => model.Tasks.EstimatedStartDate)             </th>             <th>                 @Html.DisplayNameFor(model => model.Tasks.EstimatedEndDate)             </th>             <th>                 @Html.DisplayNameFor(model => model.Tasks.RealStartDate)             </th>             <th>                 @Html.DisplayNameFor(model => model.Tasks.RealEndDate)             </th>             <th>                 @Html.DisplayNameFor(model => model.Tasks.EstimatedHours)             </th>             <th>                 @Html.DisplayNameFor(model => model.Tasks.ElapsedHours)             </th>             <th>                 @Html.DisplayNameFor(model => model.Tasks.PendingHours)             </th>             <th>                 @Html.DisplayNameFor(model => model.Tasks.Status)             </th>             <th></th>         </tr>     </thead>     <tbody> @foreach (var item in Model)
+{<tr>             <td>                 @Html.DisplayFor(modelItem => item.Tasks.TaskId)             </td>             <td>                 @Html.DisplayFor(modelItem => item.Tasks.Description)             </td>             <td>                 @Html.DisplayFor(modelItem => item.Tasks.Type)             </td>             <td>                 @Html.DisplayFor(modelItem => item.Tasks.Criticality)             </td>             <td>                 @Html.DisplayFor(modelItem => item.Tasks.Priority)             </td>             <td>                 @Html.DisplayFor(modelItem => item.Tasks.CreateDate)             </td>             <td>                 @Html.DisplayFor(modelItem => item.Tasks.EstimatedStartDate)             </td>             <td>                 @Html.DisplayFor(modelItem => item.Tasks.EstimatedEndDate)             </td>             <td>                 @Html.DisplayFor(modelItem => item.Tasks.RealStartDate)             </td>             <td>                 @Html.DisplayFor(modelItem => item.Tasks.RealEndDate)             </td>             <td>                 @Html.DisplayFor(modelItem => item.Tasks.EstimatedHours)             </td>             <td>                 @Html.DisplayFor(modelItem => item.Tasks.ElapsedHours)             </td>             <td>                 @Html.DisplayFor(modelItem => item.Tasks.PendingHours)             </td>             <td>                 @Html.DisplayFor(modelItem => item.Tasks.Status)             </td>             <td>                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>             </td>         </tr>
+}     </tbody> </table> 

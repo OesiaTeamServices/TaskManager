@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,16 +14,20 @@ namespace Oesia.Controllers
     public class UserSubtasksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private UserManager<AppUser> _userManager;
 
-        public UserSubtasksController(ApplicationDbContext context)
+        public UserSubtasksController(ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: UserSubtasks
         public async Task<IActionResult> Index()
         {
-            return View(await _context.UserSubtask.ToListAsync());
+            AppUser user = await _userManager.GetUserAsync(User);
+            string id = user.Id;
+            return View(await _context.UserSubtask.Include(x => x.AppUsers).Include(x => x.Subtasks).Where(x => x.AppUsers.Id == id).ToListAsync());
         }
 
         // GET: UserSubtasks/Details/5
