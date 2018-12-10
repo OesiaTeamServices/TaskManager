@@ -31,7 +31,7 @@
         //console.log(filetredHeader);
             return (
                 <div className="commentBox">
-                    <h1>Projects</h1>
+                    <h1>Projects!</h1>
                     <table>
                         <colgroup span="4"></colgroup>
                         <thead>
