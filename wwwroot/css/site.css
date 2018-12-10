@@ -35,3 +35,20 @@ body {
         display: none;
     }
 }
+
+.footerPar{
+    position:fixed;
+    position:center;
+    bottom: 0%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+table, th, td {
+    padding: 5px;
+    border: 1px solid black;
+}
+
