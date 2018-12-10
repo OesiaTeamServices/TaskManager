@@ -33,6 +33,48 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                General info
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a asp-area="" asp-controller="Projects" asp-action="Index">Projects</a></li>
+                                <li><a asp-area="" asp-controller="Modules" asp-action="Index">Modules</a></li>
+                                <li><a asp-area="" asp-controller="Submodules" asp-action="Index">Submodules</a></li>
+                                <li><a asp-area="" asp-controller="Tasks" asp-action="Index">Tasks</a></li>
+                                <li><a asp-area="" asp-controller="Subtasks" asp-action="Index">Subtasks</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Data by login
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a asp-area="" asp-controller="UserProjects" asp-action="Index">ProjectsByLogin</a></li>
+                                <li><a asp-area="" asp-controller="UserTasks" asp-action="Index">TaskByLogin</a></li>
+                                <li><a asp-area="" asp-controller="UserSubtasks" asp-action="Index">SubtaskByLogin</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Add new
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a asp-area="Identity" asp-page="/Account/Register">User</a></li>
+                                <li><a asp-area="" asp-controller="Projects" asp-action="Create">Project</a></li>
+                                <li><a asp-area="" asp-controller="Tasks" asp-action="Create">Task</a></li>
+                                <li><a asp-area="" asp-controller="Subtasks" asp-action="Create">Subtask</a></li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
                 <partial name="_LoginPartial" />
             </div>

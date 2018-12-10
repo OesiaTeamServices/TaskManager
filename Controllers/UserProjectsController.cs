@@ -14,16 +14,20 @@ namespace Oesia.Controllers
     public class UserProjectsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private UserManager<AppUser> _userManager;
 
-        public UserProjectsController(ApplicationDbContext context)
+        public UserProjectsController(ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: UserProjects
         public async Task<IActionResult> Index()
         {
-            return View(await _context.UserProject.ToListAsync());
+            AppUser user = await _userManager.GetUserAsync(User);
+            string id = user.Id;
+            return View(await _context.UserProject.Include(x => x.AppUsers).Include(x => x.Projects).Where(x => x.AppUsers.Id == id).ToListAsync());
         }
 
         // GET: UserProjects/Details/5
