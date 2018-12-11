@@ -1,8 +1,10 @@
 @model Oesia.Models.Module
+@inject Oesia.Services.OesiaServices Services
 
 @{
     ViewData["Title"] = "Create";
 }
+
 
 <h2>Create</h2>
 
@@ -17,6 +19,12 @@
                 <input asp-for="ModuleId" class="form-control" />
                 <span asp-validation-for="ModuleId" class="text-danger"></span>
             </div>
+            @*<select asp-for="">
+                @foreach (Project item in Services.GetProjectsDB())
+                {
+                <option value="@item.ProjectId">@item.ProjectId</option>
+                }
+            </select>*@
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
@@ -28,23 +36,23 @@
                 <span asp-validation-for="EstimatedHours" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-                <label asp-for="ElapsedHours" class="control-label"></label>
-                <input asp-for="ElapsedHours" class="form-control" />
-                <span asp-validation-for="ElapsedHours" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PendingHours" class="control-label"></label>
-                <input asp-for="PendingHours" class="form-control" />
-                <span asp-validation-for="PendingHours" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>*@
+            <label asp-for="ElapsedHours" class="control-label"></label>
+            <input asp-for="ElapsedHours" class="form-control" />
+            <span asp-validation-for="ElapsedHours" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PendingHours" class="control-label"></label>
+            <input asp-for="PendingHours" class="form-control" />
+            <span asp-validation-for="PendingHours" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Status" class="control-label"></label>
+            <input asp-for="Status" class="form-control" />
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
-                <a class="btn btn-default" asp-area="" asp-controller="Submodules" asp-action="Create">Add Submodule</a>
+                @*<a class="btn btn-default" asp-area="" asp-controller="Submodules" asp-action="Create">Add Submodule</a>*@
             </div>
         </form>
     </div>
