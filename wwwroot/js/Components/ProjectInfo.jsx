@@ -1,30 +1,29 @@
 ﻿class ProjectsTable extends React.Component {
-        constructor(props) {
-            super(props);
-            this.state = {
-                data: []
-                //filteredHeader: data[0]
-            };
-            //this.loadDataFromServer = this.loadDataFromServer.bind(this);
-        }
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: []
+        };
+        //this.loadDataFromServer = this.loadDataFromServer.bind(this);
+    }
 
-        loadDataFromServer() {
-            const xhr = new XMLHttpRequest();
-            xhr.open('get', this.props.url, true);
-            console.log(this.props.url)
-            xhr.onload = () => {
-                console.log(xhr.responseText)
-                const data = JSON.parse(xhr.responseText);
-                console.log(data)
-                this.setState({ data: data });
-                console.log(data)
-            };
-            xhr.send();
-        }
+    loadDataFromServer() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('get', this.props.url, true);
+        console.log(this.props.url)
+        xhr.onload = () => {
+            console.log(xhr.responseText)
+            const data = JSON.parse(xhr.responseText);
+            console.log(data)
+            this.setState({ data: data });
+            console.log(data)
+        };
+        xhr.send();
+    }
 
-        componentDidMount() {
-            this.loadDataFromServer();
-        }
+    componentDidMount() {
+        this.loadDataFromServer();
+    }
 
     render() {
         return (
@@ -49,7 +48,7 @@
                     <tbody>{this.state.data.map(function (item, key) {
 
                         return (
-                            <tr key={key}>                                 
+                            <tr key={key}>
                                 <td>{item.projectId}</td>
                                 <td>{item.description}</td>
                                 <td>{item.userId}</td>
@@ -92,7 +91,7 @@ class TableRow extends React.Component {
 class TableHeader extends React.Component {
     render() {
         return (
-              <th>Header</th>
+            <th>Header</th>
         );
     }
 }
@@ -106,6 +105,6 @@ class TableData extends React.Component {
 }
 
 ReactDOM.render(
-    <ProjectsTable url="/ProjectsJson" />,
+    <ProjectsTable url="/UserProjectsJson" />,
     document.getElementById('content'),
 );

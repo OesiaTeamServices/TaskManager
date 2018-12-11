@@ -30,6 +30,27 @@ namespace Oesia.Controllers
             return View(await _context.UserProject.Include(x => x.AppUsers).Include(x => x.Projects).Where(x => x.AppUsers.Id == id).ToListAsync());
         }
 
+        // GET: UserProjects Json
+        [Route("UserProjectsJson")]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        public async Task<IActionResult> UserProjectsJson()
+        {
+            AppUser user = await _userManager.GetUserAsync(User);
+            string id = user.Id;
+            List<UserProject> projects = await _context.UserProject.Include(x => x.AppUsers).Include(x => x.Projects).Where(x => x.AppUsers.Id == id).ToListAsync();
+            return Json(projects);
+        }
+        // GET: UserProjects Json
+        //[Route("UserProjectsJson")]
+        // [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        // public async Task<IActionResult> UserProjectsJson()
+        // {
+        //     AppUser user = await _userManager.GetUserAsync(User);
+        //     string id = user.Id;
+        //     return Json(await _context.UserProject.Include(x => x.AppUsers).Include(x => x.Projects).Where(x => x.AppUsers.Id == id).ToListAsync());
+        // }
+
+
         // GET: UserProjects/Details/5
         public async Task<IActionResult> Details(long? id)
         {
