@@ -25,6 +25,15 @@ namespace Oesia.Controllers
             return View(await _context.Module.ToListAsync());
         }
 
+        //[Route("ModuleJson")]
+        //[ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        //// GET: Modules
+        //public async Task<IActionResult> ModuleJson()
+        //{
+        //    return Json(await _context.Module.ToListAsync());
+        //}
+
+
         // GET: Modules/Details/5
         public async Task<IActionResult> Details(long? id)
         {

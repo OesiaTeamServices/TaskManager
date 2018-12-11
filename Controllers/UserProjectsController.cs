@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Oesia.Data;
 using Oesia.Models;
 
@@ -29,6 +30,21 @@ namespace Oesia.Controllers
             string id = user.Id;
             return View(await _context.UserProject.Include(x => x.AppUsers).Include(x => x.Projects).Where(x => x.AppUsers.Id == id).ToListAsync());
         }
+
+        // GET: UserProjects Json
+        [Route("UserProjectsJson")]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        public async Task<JsonResult> UserProjectsJson()
+        {
+            AppUser user = await _userManager.GetUserAsync(User);
+            string id = user.Id;
+          
+            List<UserProject>projects = await _context.UserProject.Include(x => x.AppUsers).Include(x => x.Projects).Where(x => x.AppUsers.Id == id).ToListAsync();
+            return Json(JsonConvert.SerializeObject(projects, Formatting.None, new JsonSerializerSettings
+            {
+                PreserveReferencesHandling = PreserveReferencesHandling.All
+            }));
+        }   
 
         // GET: UserProjects/Details/5
         public async Task<IActionResult> Details(long? id)
