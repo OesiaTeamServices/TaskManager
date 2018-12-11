@@ -2,7 +2,7 @@
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: { $values: [] }
         };
         //this.loadDataFromServer = this.loadDataFromServer.bind(this);
     }
@@ -12,11 +12,9 @@
         xhr.open('get', this.props.url, true);
         console.log(this.props.url)
         xhr.onload = () => {
-            console.log(xhr.responseText)
-            const data = JSON.parse(xhr.responseText);
-            console.log(data)
+            const data = JSON.parse(JSON.parse(xhr.responseText));
+            console.log(data);
             this.setState({ data: data });
-            console.log(data)
         };
         xhr.send();
     }
@@ -45,20 +43,21 @@
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody>{this.state.data.map(function (item, key) {
+                    <tbody>{
+                        this.state.data.$values.map(function (item, key) {
 
                         return (
                             <tr key={key}>
-                                <td>{item.projectId}</td>
-                                <td>{item.description}</td>
-                                <td>{item.userId}</td>
-                                <td>{item.createDate}</td>
-                                <td>{item.startDate}</td>
-                                <td>{item.endDate}</td>
-                                <td>{item.estimatedHours}</td>
-                                <td>{item.elapsedHours}</td>
-                                <td>{item.pendingHours}</td>
-                                <td>{item.status}</td>
+                                <td>{item.Email}</td>
+                                <td>{item.Description}</td>
+                                <td>{item.UserName}</td>
+                                <td>{item.CreateDate}</td>
+                                <td>{item.StartDate}</td>
+                                <td>{item.EndDate}</td>
+                                <td>{item.EstimatedHours}</td>
+                                <td>{item.ElapsedHours}</td>
+                                <td>{item.PendingHours}</td>
+                                <td>{item.Status}</td>
                             </tr>
                         )
                     })}</tbody>
