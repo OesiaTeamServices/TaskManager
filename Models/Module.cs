@@ -14,5 +14,9 @@ namespace Oesia.Models
         public double PendingHours { get; set; }
         public string Status { get; set; }
         public List<Submodule> Submodules { get; set; }
+       
+        public long ProjectId { get; set; }
+        public Project Project { get; set; }
+
     }
 }

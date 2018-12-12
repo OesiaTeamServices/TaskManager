@@ -23,5 +23,8 @@ namespace Oesia.Models
         public string Status { get; set; }
         public List<Subtask> Subtasks { get; set; }
         public List<UserTask> UserTasks { get; set; }
+
+        public long SubmoduleId { get; set; }
+        public Submodule Submodule { get; set; }
     }
 }

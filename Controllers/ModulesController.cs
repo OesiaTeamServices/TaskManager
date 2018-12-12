@@ -63,8 +63,10 @@ namespace Oesia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ModuleId,Description,EstimatedHours,ElapsedHours,PendingHours,Status")] Module @module)
+        public async Task<IActionResult> Create([Bind("Id,ModuleId,Description,EstimatedHours,ElapsedHours,PendingHours,Status,ProjectId")] Module @module)
         {
+            module.PendingHours = module.EstimatedHours;
+            module.Status = "At risk";
             if (ModelState.IsValid)
             {
                 _context.Add(@module);

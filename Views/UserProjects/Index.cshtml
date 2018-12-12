@@ -80,8 +80,8 @@
                     @Html.DisplayFor(modelItem => item.Projects.Status)
                 </td>
                 <td>
-                    @*if you want to access subtasks from projects:
-                        Html.DisplayNameFor(model => model.Projects.Modules[].Submodules[].Tasks[].Subtasks)*@
+                    @*if you want to access subtasks from projects:*@
+                    @Html.DisplayFor(modelItem => item.Projects.Modules[1].Submodules[1].Tasks[1].Subtasks[1].Description)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

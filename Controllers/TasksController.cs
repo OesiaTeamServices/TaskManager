@@ -2,21 +2,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Oesia.Data;
 using Oesia.Models;
+using Oesia.Services;
 
 namespace Oesia.Controllers
 {
     public class TasksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly OesiaServices _services;
 
-        public TasksController(ApplicationDbContext context)
+        public TasksController(ApplicationDbContext context, 
+                               UserManager<AppUser> userManager,
+                               OesiaServices services)
         {
             _context = context;
+            _userManager = userManager;
+            _services = services;
         }
 
         // GET: Tasks
@@ -54,11 +62,30 @@ namespace Oesia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TaskId,Description,Type,Criticality,Priority,CreateDate,EstimatedStartDate,EstimatedEndDate,RealStartDate,RealEndDate,EstimatedHours,ElapsedHours,PendingHours,Status")] Oesia.Models.Task task)
+        public async Task<IActionResult> Create([Bind("Id,TaskId,Description,Type,Criticality,Priority,CreateDate,EstimatedStartDate,EstimatedEndDate,RealStartDate,RealEndDate,EstimatedHours,ElapsedHours,PendingHours,Status,SubmoduleId")] Oesia.Models.Task task, string UserId)
         {
+            task.CreateDate = DateTime.Now;
+            task.PendingHours = task.EstimatedHours;
+            task.Status = "At risk";
+
+            AppUser user = new AppUser();
+            foreach(AppUser item in _services.GetUsersByRoleDB("Task manager")) {
+                if(item.Id == UserId){
+                    user = item;
+                }
+            }
+
+            // Create new obeject which links AppUsers and Tasks
+            UserTask userTask = new UserTask
+            {
+                AppUsers = user,
+                Tasks = task
+            };
+
             if (ModelState.IsValid)
             {
                 _context.Add(task);
+                _context.UserTask.Add(userTask);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
