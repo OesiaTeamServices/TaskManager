@@ -2,32 +2,50 @@
     constructor(props) {
         super(props);
         this.state = {
-            data: { $values: [] }
+            userProjectsData: [],
+            projectsData: []
         };
         //this.loadDataFromServer = this.loadDataFromServer.bind(this);
     }
 
-    loadDataFromServer() {
-        const xhr = new XMLHttpRequest();
-        xhr.open('get', this.props.url, true);
-        console.log(this.props.url)
-        xhr.onload = () => {
-            const data = JSON.parse(JSON.parse(xhr.responseText));
-            console.log(data);
-            this.setState({ data: data });
-        };
-        xhr.send();
+    //loadDataFromServer() {
+    //    const xhr = new XMLHttpRequest();
+    //    xhr.open('get', this.props.url, true);
+    //    console.log(this.props.url)
+    //    xhr.onload = () => {
+    //        const data = JSON.parse(JSON.parse(xhr.responseText));
+    //        console.log(data);
+    //        this.setState({ data: data });
+    //    };
+    //    xhr.send();
+    //}
+
+    //componentDidMount() {
+    //    this.loadDataFromServer();
+    //}
+
+    componentDidMount() {
+        fetch('https://myapioesia.azurewebsites.net/api/projects')
+
+            .then(projectsData => projectsDate.json())
+            .then(projectsData => this.setState({ projectsDate }))
+        console.log("state", this.state.projectsDate)
     }
 
     componentDidMount() {
-        this.loadDataFromServer();
+        fetch('https://myapioesia.azurewebsites.net/api/userprojects')
+
+            .then(userProjectsData => userProjectsData.json())
+            .then(userProjectsData => this.setState({ userProjectsData }))     
+        console.log("state", this.state.userProjectsData)
     }
+
 
     render() {
         return (
-            <div className="commentBox">
+            <div className="tableWithProjects">
                 <h1>Projects</h1>
-                <button class="createBtn" type="button"><a href="/Create"><b>Create</b></a> </button>
+                <button className="createBtn" type="button"><a href="/Create"><b>Create</b></a> </button>
                 <table>
                     <colgroup span="4"></colgroup>
                     <thead>
@@ -48,30 +66,32 @@
                         </tr>
                     </thead>
                     <tbody>{
-                        this.state.data.$values.map(function (item, key) {
 
+                        this.state.projectsData.filter(function (y) {
+
+                            this.state.userProjectsData.map(function (i) {
+                                return i.projectsId;
+                            })
+                            if (i.projectsId === y.id) {
+                                console.log(i.projectsId)
+                                this.state.projectsData.map(function (item, key) {                          
                         return (
                             <tr key={key}>
-                                <td>{item.AppUsers.FirstName}</td>
-                                <td>{item.AppUsers.LastName}</td>
-
-                                <td>{item.AppUsers.Email}</td>
-                                <td>{item.Projects.Description}</td>
-                                <td>{item.Projects.CreateDate}</td>
-                                <td>{item.Projects.StartDate}</td>
-                                <td>{item.Projects.EndDate}</td>
-                                <td>{item.Projects.EstimatedHours}</td>
-                                <td>{item.Projects.ElapsedHours}</td>
-                                <td>{item.Projects.PendingHours}</td>
-                                <td>{item.Projects.Status}</td>
+                                <td>{item.id}</td>
+                                <td>{item.description}</td>
+                                <td>{item.userId}</td>                        
                                 <td>
-                                    <button className="createBtn" type="button"><a href="/Create"><b>Edit</b></a> </button>
-                                    <button className="createBtn" type="button"><a href="/Create"><b>Delete</b></a> </button>
+                                    <button className="createBtn" type="button"><a href="/Edit"><b>Edit</b></a> </button>
+                                    <button className="createBtn" type="button"><a href="/Delete"><b>Delete</b></a> </button>
                                 </td>
 
                             </tr>
-                        )
-                    })}</tbody>
+                                    )
+                                })
+                            }
+
+                        })
+                    }</tbody>
                 </table>
             </div>
         );
