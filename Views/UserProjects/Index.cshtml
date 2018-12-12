@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -81,7 +81,7 @@
                 </td>
                 <td>
                     @*if you want to access subtasks from projects:
-                        Html.DisplayNameFor(model => model.Projects.Modules[].Submodules[].Tasks[].Subtasks)*@
+                        @Html.DisplayNameFor(model => item.Projects.Modules[0].Submodules[0].Tasks[0].Subtasks[0].Id)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -91,8 +91,7 @@
             </tr>
         }
     </tbody>
-</table>
-
+</table>*@
 <div id="content"></div>
 
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.0/umd/react.development.js"></script>
