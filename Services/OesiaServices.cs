@@ -93,5 +93,63 @@ namespace Oesia.Services
         //    };
         //    return link;
         //}
+
+        public string GetNameAndSurnamesDBFromId(string userId)
+        {
+            List<AppUser> users = _context.AppUser.Where(x => x.Id == userId).ToList();
+            string name = "";
+            string surname = "";
+            if (users.Count == 1)
+            {
+                name = users[0].FirstName;
+                surname = users[0].LastName;
+            }
+            return name + " " + surname;
+        }
+
+        public List<string> LisOfTypes()
+        {
+            List<string> types = new List<string>
+            {
+                "Error",
+                "Internal task",
+                "Modification",
+                "Suport"
+            };
+            return types;
+        }
+
+        public List<string> LisOfCriticality()
+        {
+            List<string> criticalities = new List<string>
+            {
+                "Aesthetic",
+                "Inhibiting",
+                "Important",
+                "Normal"
+            };
+            return criticalities;
+        }
+
+        public List<string> LisOfPriority()
+        {
+            List<string> priorities = new List<string>
+            {
+                "P1",
+                "P2",
+                "P3",
+            };
+            return priorities;
+        }
+
+        public string GetUserIdFromTaskId(int taskId)
+        {
+            List<UserTask> relations = _context.UserTask.Where(x => x.Tasks.Id == taskId).ToList();
+            if (relations.Count == 1)
+            {
+                return relations[0].AppUsers.Id;
+            }
+            return "";
+        }
     }
 }

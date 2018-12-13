@@ -62,7 +62,7 @@ namespace Oesia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubtaskId,Description,UserId,EstimatedHours,ElapsedHours,PendingHours,Observations,Status,TaskId")] Subtask subtask)
+        public async Task<IActionResult> Create([Bind("Id,SubtaskId,Description,UserId,EstimatedHours,ElapsedHours,PendingHours,Observations,Status,TaskId,UserId")] Subtask subtask)
         {
             subtask.PendingHours = subtask.EstimatedHours;
             subtask.Status = "At risk";
@@ -112,8 +112,22 @@ namespace Oesia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,SubtaskId,Description,UserId,EstimatedHours,ElapsedHours,PendingHours,Observations,Status")] Subtask subtask)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,SubtaskId,Description,UserId,EstimatedHours,ElapsedHours,PendingHours,Observations,Status,TaskId,UserId")] Subtask subtask )
         {
+            AppUser user = new AppUser();
+            foreach (AppUser userChoice in _services.GetUsersByRoleDB("Technician"))
+            {
+                if (userChoice.Id == subtask.UserId)
+                {
+                    user = userChoice;
+                }
+            }
+
+            UserSubtask userSubtask = new UserSubtask();
+            userSubtask = await _context.UserSubtask.FirstOrDefaultAsync(x => x.AppUsers.Id == user.Id && x.Subtasks.Id == subtask.Id);
+            userSubtask.AppUsers = user;
+            userSubtask.Subtasks = subtask;
+
             if (id != subtask.Id)
             {
                 return NotFound();
@@ -124,6 +138,7 @@ namespace Oesia.Controllers
                 try
                 {
                     _context.Update(subtask);
+                    _context.UserSubtask.Update(userSubtask);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -174,6 +189,56 @@ namespace Oesia.Controllers
         private bool SubtaskExists(long id)
         {
             return _context.Subtask.Any(e => e.Id == id);
+        }
+
+        [HttpPost]
+        //PLAY 
+        public async Task<IActionResult> Play(long id)
+        {
+            //_context.UserSubtask.Single()
+            AppUser currentUser = await _userManager.GetUserAsync(User);
+            UserSubtask userSubtask = _context.UserSubtask.Single(x => x.AppUsers.Id == currentUser.Id && x.Subtasks.Id == id);
+
+            /*UserSubtask sb = _context.UserSubtask.LastOrDefault(m => m.AppUsers.Id== currentUser.Id);*/
+            DateTime playtime = DateTime.Now;
+            userSubtask.PlayTime = playtime;
+            _context.UserSubtask.Update(userSubtask);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Subtasks", "Index");
+        }
+
+        //Pause
+        public async Task<IActionResult> Pause(long id)
+        {
+            //_context.UserSubtask.Single()
+            AppUser currentUser = await _userManager.GetUserAsync(User);
+            UserSubtask userSubtask = _context.UserSubtask.Single(x => x.AppUsers.Id == currentUser.Id && x.Subtasks.Id == id);
+
+            /*UserSubtask sb = _context.UserSubtask.LastOrDefault(m => m.AppUsers.Id== currentUser.Id)*/
+            ;
+            DateTime pausetime = DateTime.Now;
+            userSubtask.PauseTime = pausetime;
+            _context.UserSubtask.Update(userSubtask);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Subtasks", "Index");
+        }
+
+
+        //STOP
+
+        public async Task<IActionResult> Stop(long id)
+        {
+            //_context.UserSubtask.Single()
+            AppUser currentUser = await _userManager.GetUserAsync(User);
+            UserSubtask userSubtask = _context.UserSubtask.Single(x => x.AppUsers.Id == currentUser.Id && x.Subtasks.Id == id);
+
+            /*UserSubtask sb = _context.UserSubtask.LastOrDefault(m => m.AppUsers.Id== currentUser.Id)*/
+            ;
+            DateTime stoptime = DateTime.Now;
+            userSubtask.StopTime = stoptime;
+            _context.UserSubtask.Update(userSubtask);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Subtasks", "Index");
         }
     }
 }

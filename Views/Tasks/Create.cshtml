@@ -33,7 +33,7 @@
             <div class="form-group">
                 <label >Choose a task manager</label>
                 <p></p>
-                <select name="UserId">
+                <select asp-for="UserId">
                     <option value="">Select a task manager...</option>
                     @foreach (AppUser user in Services.GetUsersByRoleDB("Task manager"))
                     {

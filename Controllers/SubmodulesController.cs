@@ -89,7 +89,7 @@ namespace Oesia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,SubmoduleId,Description,EstimatedHours,ElapsedHours,PendingHours,Status")] Submodule submodule)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,SubmoduleId,Description,EstimatedHours,ElapsedHours,PendingHours,Status,ModuleId")] Submodule submodule)
         {
             if (id != submodule.Id)
             {

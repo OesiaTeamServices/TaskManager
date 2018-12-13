@@ -1,4 +1,5 @@
 @model IEnumerable<Oesia.Models.Task>
+@inject Oesia.Services.OesiaServices Services
 
 @{
     ViewData["Title"] = "Index";
@@ -14,6 +15,9 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.TaskId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
@@ -58,56 +62,60 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Criticality)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Priority)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstimatedStartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstimatedEndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RealStartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RealEndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstimatedHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ElapsedHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PendingHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskId)
+                </td>
+                <td>
+                    @Services.GetNameAndSurnamesDBFromId(item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Criticality)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Priority)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstimatedStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstimatedEndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RealStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RealEndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstimatedHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ElapsedHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PendingHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

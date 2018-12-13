@@ -97,7 +97,7 @@ namespace Oesia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,ModuleId,Description,EstimatedHours,ElapsedHours,PendingHours,Status")] Module @module)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,ModuleId,Description,EstimatedHours,ElapsedHours,PendingHours,Status,ProjectId")] Module @module)
         {
             if (id != @module.Id)
             {

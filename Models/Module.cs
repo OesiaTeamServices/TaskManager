@@ -17,6 +17,5 @@ namespace Oesia.Models
        
         public long ProjectId { get; set; }
         public Project Project { get; set; }
-
     }
 }

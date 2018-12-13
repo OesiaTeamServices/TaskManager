@@ -9,6 +9,7 @@ namespace Oesia.Models
         public long Id { get; set; }
         public string TaskId { get; set; }
         public string Description { get; set; }
+        public string UserId { get; set; }
         public string Type { get; set; }
         public string Criticality { get; set; }
         public string Priority { get; set; }

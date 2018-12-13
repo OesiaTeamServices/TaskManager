@@ -62,7 +62,7 @@ namespace Oesia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TaskId,Description,Type,Criticality,Priority,CreateDate,EstimatedStartDate,EstimatedEndDate,RealStartDate,RealEndDate,EstimatedHours,ElapsedHours,PendingHours,Status,SubmoduleId")] Oesia.Models.Task task, string UserId)
+        public async Task<IActionResult> Create([Bind("Id,TaskId,Description,Type,Criticality,Priority,CreateDate,EstimatedStartDate,EstimatedEndDate,RealStartDate,RealEndDate,EstimatedHours,ElapsedHours,PendingHours,Status,SubmoduleId,UserId")] Oesia.Models.Task task)
         {
             task.CreateDate = DateTime.Now;
             task.PendingHours = task.EstimatedHours;
@@ -70,7 +70,7 @@ namespace Oesia.Controllers
 
             AppUser user = new AppUser();
             foreach(AppUser item in _services.GetUsersByRoleDB("Task manager")) {
-                if(item.Id == UserId){
+                if(item.Id == task.UserId){
                     user = item;
                 }
             }
@@ -113,8 +113,22 @@ namespace Oesia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,TaskId,Description,Type,Criticality,Priority,CreateDate,EstimatedStartDate,EstimatedEndDate,RealStartDate,RealEndDate,EstimatedHours,ElapsedHours,PendingHours,Status")] Oesia.Models.Task task)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,TaskId,Description,Type,Criticality,Priority,CreateDate,EstimatedStartDate,EstimatedEndDate,RealStartDate,RealEndDate,EstimatedHours,ElapsedHours,PendingHours,Status,SubmoduleId,UserId")] Oesia.Models.Task task )
         {
+            AppUser user = new AppUser();
+            foreach (AppUser userChoice in _services.GetUsersByRoleDB("Task manager"))
+            {
+                if (userChoice.Id == task.UserId)
+                {
+                    user = userChoice;
+                }
+            }
+
+            UserTask userTask = new UserTask();
+            userTask = await _context.UserTask.FirstOrDefaultAsync(x => x.AppUsers.Id == user.Id && x.Tasks.Id == task.Id);
+            userTask.AppUsers = user;
+            userTask.Tasks = task;
+
             if (id != task.Id)
             {
                 return NotFound();
@@ -125,6 +139,7 @@ namespace Oesia.Controllers
                 try
                 {
                     _context.Update(task);
+                    _context.UserTask.Update(userTask);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
