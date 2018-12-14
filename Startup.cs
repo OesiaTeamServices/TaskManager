@@ -10,6 +10,9 @@ using Oesia.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Oesia.Models;
+using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
+using JavaScriptEngineSwitcher.ChakraCore;
+using Oesia.Services;
 
 namespace Oesia
 {
@@ -27,6 +30,8 @@ namespace Oesia
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName)
+        .AddChakraCore();
             //_movieApiKey = Configuration["DefaultConnection"];
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -43,6 +48,7 @@ namespace Oesia
             services.AddIdentity<AppUser, AppRole>(options => options.Stores.MaxLengthForKeys = 128).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI().AddDefaultTokenProviders();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<OesiaServices>();
             services.AddReact();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

@@ -19,12 +19,18 @@
                 <input asp-for="ModuleId" class="form-control" />
                 <span asp-validation-for="ModuleId" class="text-danger"></span>
             </div>
-            @*<select asp-for="">
-                @foreach (Project item in Services.GetProjectsDB())
-                {
-                <option value="@item.ProjectId">@item.ProjectId</option>
-                }
-            </select>*@
+            <div class="form-group">
+                <label class="control-label">Assign it to a project</label>
+                <p></p>
+                <select asp-for="ProjectId">
+                    <option value="">Choose a project...</option>
+                    @foreach (Project item in Services.GetProjectsDB())
+                    {
+                    <option value="@item.Id">@item.ProjectId</option>
+                    }
+                </select>
+                <span class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
