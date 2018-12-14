@@ -1,4 +1,5 @@
 @model Oesia.Models.Task
+@inject Oesia.Services.OesiaServices Services
 
 @{
     ViewData["Title"] = "Edit";
@@ -18,31 +19,91 @@
                 <input asp-for="TaskId" class="form-control" />
                 <span asp-validation-for="TaskId" class="text-danger"></span>
             </div>
+            @*<div class="form-group">
+                <label>Reassign to task manager</label>
+                <p></p>
+                <select name="UserId">
+                    <option value="@user.Id">@Services.GetUserIdFromTaskId</option>
+                    @foreach (AppUser user in Services.GetUsersByRoleDB("Task manager"))
+                    {
+                        if(@user.Id != Model.UserId)
+                        {
+                            <option value="@user.Id">@user.FirstName @user.LastName</option>
+                        }
+                    }
+                </select>
+                <span class="text-danger"></span>
+            </div>*@
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Type" class="control-label"></label>
-                <input asp-for="Type" class="form-control" />
+                <label >Reasign to a task manager</label>
+                <p></p>
+                <select asp-for="UserId">
+                    <option value="@Model.UserId">@Services.GetNameAndSurnamesDBFromId(Model.UserId)</option>
+                    @foreach (AppUser user in Services.GetUsersByRoleDB("Task manager"))
+                    {
+                        if(user.Id != Model.UserId)
+                        {
+                            <option value="@user.Id">@user.FirstName @user.LastName</option>
+                        }
+                    }
+                </select>
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type"></label>
+                <p></p>
+                <select asp-for="Type">
+                    <option value="@Model.Type">@Model.Type</option>
+                    @foreach (var item in Services.LisOfTypes())
+                    {
+                        if (item != Model.Type)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Criticality" class="control-label"></label>
-                <input asp-for="Criticality" class="form-control" />
+                <label asp-for="Criticality"></label>
+                <p></p>
+                <select asp-for="Criticality">
+                    <option value="@Model.Criticality">@Model.Criticality</option>
+                    @foreach (var item in Services.LisOfCriticality())
+                    {
+                        if (item != Model.Criticality)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
                 <span asp-validation-for="Criticality" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Priority" class="control-label"></label>
-                <input asp-for="Priority" class="form-control" />
+                <label asp-for="Priority"></label>
+                <p></p>
+                <select asp-for="Priority">
+                    <option value="@Model.Priority">@Model.Priority</option>
+                    @foreach (var item in Services.LisOfPriority())
+                    {
+                        if (item != Model.Priority)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
                 <span asp-validation-for="Priority" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="CreateDate" class="control-label"></label>
-                <input asp-for="CreateDate" class="form-control" />
-                <span asp-validation-for="CreateDate" class="text-danger"></span>
-            </div>*@
+            <div class="form-group">
+                    @*<label asp-for="CreateDate" class="control-label"></label>*@
+                    <input type="hidden" asp-for="CreateDate" class="form-control" />
+                    @*<span asp-validation-for="CreateDate" class="text-danger"></span>*@
+                </div>
             <div class="form-group">
                 <label asp-for="EstimatedStartDate" class="control-label"></label>
                 <input asp-for="EstimatedStartDate" class="form-control" />
@@ -53,36 +114,46 @@
                 <input asp-for="EstimatedEndDate" class="form-control" />
                 <span asp-validation-for="EstimatedEndDate" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="RealStartDate" class="control-label"></label>
-                <input asp-for="RealStartDate" class="form-control" />
-                <span asp-validation-for="RealStartDate" class="text-danger"></span>
+            <div class="form-group">
+                @*<label asp-for="RealStartDate" class="control-label"></label>*@
+                <input type="hidden" asp-for="RealStartDate" class="form-control" />
+                @*<span asp-validation-for="RealStartDate" class="text-danger"></span>*@
             </div>
             <div class="form-group">
-                <label asp-for="RealEndDate" class="control-label"></label>
-                <input asp-for="RealEndDate" class="form-control" />
-                <span asp-validation-for="RealEndDate" class="text-danger"></span>
-            </div>*@
+                @*<label asp-for="RealEndDate" class="control-label"></label>*@
+                <input type="hidden" asp-for="RealEndDate" class="form-control" />
+                @*<span asp-validation-for="RealEndDate" class="text-danger"></span>*@
+            </div>
             <div class="form-group">
                 <label asp-for="EstimatedHours" class="control-label"></label>
                 <input asp-for="EstimatedHours" class="form-control" />
                 <span asp-validation-for="EstimatedHours" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="ElapsedHours" class="control-label"></label>
-                <input asp-for="ElapsedHours" class="form-control" />
-                <span asp-validation-for="ElapsedHours" class="text-danger"></span>
+            <div class="form-group">
+                @*<label asp-for="ElapsedHours" class="control-label"></label>*@
+                <input type="hidden" asp-for="ElapsedHours" class="form-control" />
+                @*<span asp-validation-for="ElapsedHours" class="text-danger"></span>*@
             </div>
             <div class="form-group">
-                <label asp-for="PendingHours" class="control-label"></label>
-                <input asp-for="PendingHours" class="form-control" />
-                <span asp-validation-for="PendingHours" class="text-danger"></span>
+                @*<label asp-for="PendingHours" class="control-label"></label>*@
+                <input type="hidden" asp-for="PendingHours" class="form-control" />
+                @*<span asp-validation-for="PendingHours" class="text-danger"></span>*@
             </div>
             <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>*@
+                @*<label asp-for="Status" class="control-label"></label>*@
+                <input type="hidden" asp-for="Status" class="form-control" />
+                @*<span asp-validation-for="Status" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                @*<label asp-for="TaskId" class="control-label"></label>*@
+                <input type="hidden" asp-for="SubmoduleId" class="form-control" readonly="readonly" value="@Model.SubmoduleId" />
+                @*<span asp-validation-for="TaskId" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                @*<label asp-for="Status" class="control-label"></label>*@
+                <input type="hidden" asp-for="Status" class="form-control" readonly="readonly" />
+                @*<span asp-validation-for="Status" class="text-danger"></span>*@
+            </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>

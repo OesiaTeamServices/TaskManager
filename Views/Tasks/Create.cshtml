@@ -1,4 +1,5 @@
 @model Oesia.Models.Task
+@inject Oesia.Services.OesiaServices Services
 
 @{
     ViewData["Title"] = "Create";
@@ -18,79 +19,118 @@
                 <span asp-validation-for="TaskId" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label class="control-label">Assign it to a submodule</label>
+                <p></p>
+                <select asp-for="SubmoduleId">
+                    <option value="">Choose a submodule...</option>
+                    @foreach (Submodule item in Services.GetSubmodulesDB())
+                    {
+                        <option value="@item.Id">@item.SubmoduleId</option>
+                    }
+                </select>
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label >Choose a task manager</label>
+                <p></p>
+                <select asp-for="UserId">
+                    <option value="">Select a task manager...</option>
+                    @foreach (AppUser user in Services.GetUsersByRoleDB("Task manager"))
+                    {
+                    <option value="@user.Id">@user.FirstName @user.LastName</option>
+                    }
+                </select>
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Type" class="control-label"></label>
-                <input asp-for="Type" class="form-control" />
+                <label asp-for="Type"></label>
+                <p></p>
+                <select asp-for="Type">
+                    <option value="null">Select a type...</option>
+                    <option value="Error">Error</option>
+                    <option value="Internal task">Internal task</option>
+                    <option value="Modification">Modification</option>
+                    <option value="Support">Support</option>
+                </select>
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Criticality" class="control-label"></label>
-                <input asp-for="Criticality" class="form-control" />
+                <label asp-for="Criticality"></label>
+                <p></p>
+                <select asp-for="Criticality">
+                    <option value="null">Select a level...</option>
+                    <option value="Aesthetic">Aesthetic</option>
+                    <option value="Inhibiting">Inhibiting</option>
+                    <option value="Important">Important</option>
+                    <option value="Normal">Normal</option>
+                </select>
                 <span asp-validation-for="Criticality" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Priority" class="control-label"></label>
-                <input asp-for="Priority" class="form-control" />
+
+                <label asp-for="Priority"></label>
+                <p></p>
+                <select asp-for="Priority">
+                    <option value="null">Select a level...</option>
+                    <option value="P1">P1</option>
+                    <option value="P2">P2</option>
+                    <option value="P3">P3</option>
+                </select>
                 <span asp-validation-for="Priority" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-            <label asp-for="CreateDate" class="control-label"></label>
-            <input asp-for="CreateDate" class="form-control" />
-            <span asp-validation-for="CreateDate" class="text-danger"></span>
-        </div>*@
+                    <label asp-for="CreateDate" class="control-label"></label>
+                    <input asp-for="CreateDate" class="form-control" />
+                    <span asp-validation-for="CreateDate" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <label asp-for="EstimatedStartDate" class="control-label"></label>
-                <inpt asp-for="EstimatedStartDate" class="form-control" />
+                <input type="datetime" asp-for="EstimatedStartDate" class="form-control" />
                 <span asp-validation-for="EstimatedStartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EstimatedEndDate" class="control-label"></label>
-                <input asp-for="EstimatedEndDate" class="form-control" />
+                <input type="datetime" asp-for="EstimatedEndDate" class="form-control" />
                 <span asp-validation-for="EstimatedEndDate" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-            <label asp-for="RealStartDate" class="control-label"></label>
-            <input asp-for="RealStartDate" class="form-control" />
-            <span asp-validation-for="RealStartDate" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="RealEndDate" class="control-label"></label>
-            <input asp-for="RealEndDate" class="form-control" />
-            <span asp-validation-for="RealEndDate" class="text-danger"></span>
-        </div>*@
+                    <label asp-for="RealStartDate" class="control-label"></label>
+                    <input asp-for="RealStartDate" class="form-control" />
+                    <span asp-validation-for="RealStartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RealEndDate" class="control-label"></label>
+                    <input asp-for="RealEndDate" class="form-control" />
+                    <span asp-validation-for="RealEndDate" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <label asp-for="EstimatedHours" class="control-label"></label>
                 <input asp-for="EstimatedHours" class="form-control" />
                 <span asp-validation-for="EstimatedHours" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-            <label asp-for="ElapsedHours" class="control-label"></label>
-            <input asp-for="ElapsedHours" class="form-control" />
-            <span asp-validation-for="ElapsedHours" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="PendingHours" class="control-label"></label>
-            <input asp-for="PendingHours" class="form-control" />
-            <span asp-validation-for="PendingHours" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Status" class="control-label"></label>
-            <input asp-for="Status" class="form-control" />
-            <span asp-validation-for="Status" class="text-danger"></span>
-        </div>*@
-        <div class="form-group">
-            <select>
-                <option></option>
-                <option></option>
-            </select>                        
-        </div>
+                    <label asp-for="ElapsedHours" class="control-label"></label>
+                    <input asp-for="ElapsedHours" class="form-control" />
+                    <span asp-validation-for="ElapsedHours" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PendingHours" class="control-label"></label>
+                    <input asp-for="PendingHours" class="form-control" />
+                    <span asp-validation-for="PendingHours" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Status" class="control-label"></label>
+                    <input asp-for="Status" class="form-control" />
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
-                <a class="btn btn-default" asp-area="" asp-controller="Tasks" asp-action="Create">Add Subtask</a>
+                @*<a class="btn btn-default" asp-area="" asp-controller="Tasks" asp-action="Create">Add Subtask</a>*@
             </div>
         </form>
     </div>

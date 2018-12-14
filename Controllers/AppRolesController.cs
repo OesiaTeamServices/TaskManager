@@ -10,88 +10,85 @@ using Oesia.Models;
 
 namespace Oesia.Controllers
 {
-    public class SubmodulesController : Controller
+    public class AppRolesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public SubmodulesController(ApplicationDbContext context)
+        public AppRolesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Submodules
+        // GET: AppRoles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Submodule.ToListAsync());
+            return View(await _context.AppRole.ToListAsync());
         }
 
-        // GET: Submodules/Details/5
-        public async Task<IActionResult> Details(long? id)
+        // GET: AppRoles/Details/5
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var submodule = await _context.Submodule
+            var appRole = await _context.AppRole
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (submodule == null)
+            if (appRole == null)
             {
                 return NotFound();
             }
 
-            return View(submodule);
+            return View(appRole);
         }
 
-        // GET: Submodules/Create
+        // GET: AppRoles/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Submodules/Create
+        // POST: AppRoles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubmoduleId,Description,EstimatedHours,ElapsedHours,PendingHours,Status,ModuleId")] Submodule submodule)
+        public async Task<IActionResult> Create([Bind("Description,CreationDate,Id,Name,NormalizedName,ConcurrencyStamp")] AppRole appRole)
         {
-            submodule.PendingHours = submodule.EstimatedHours;
-            submodule.Status = "At risk";
-
             if (ModelState.IsValid)
             {
-                _context.Add(submodule);
+                _context.Add(appRole);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(submodule);
+            return View(appRole);
         }
 
-        // GET: Submodules/Edit/5
-        public async Task<IActionResult> Edit(long? id)
+        // GET: AppRoles/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var submodule = await _context.Submodule.FindAsync(id);
-            if (submodule == null)
+            var appRole = await _context.AppRole.FindAsync(id);
+            if (appRole == null)
             {
                 return NotFound();
             }
-            return View(submodule);
+            return View(appRole);
         }
 
-        // POST: Submodules/Edit/5
+        // POST: AppRoles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,SubmoduleId,Description,EstimatedHours,ElapsedHours,PendingHours,Status,ModuleId")] Submodule submodule)
+        public async Task<IActionResult> Edit(string id, [Bind("Description,CreationDate,Id,Name,NormalizedName,ConcurrencyStamp")] AppRole appRole)
         {
-            if (id != submodule.Id)
+            if (id != appRole.Id)
             {
                 return NotFound();
             }
@@ -100,12 +97,12 @@ namespace Oesia.Controllers
             {
                 try
                 {
-                    _context.Update(submodule);
+                    _context.Update(appRole);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SubmoduleExists(submodule.Id))
+                    if (!AppRoleExists(appRole.Id))
                     {
                         return NotFound();
                     }
@@ -116,41 +113,41 @@ namespace Oesia.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(submodule);
+            return View(appRole);
         }
 
-        // GET: Submodules/Delete/5
-        public async Task<IActionResult> Delete(long? id)
+        // GET: AppRoles/Delete/5
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var submodule = await _context.Submodule
+            var appRole = await _context.AppRole
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (submodule == null)
+            if (appRole == null)
             {
                 return NotFound();
             }
 
-            return View(submodule);
+            return View(appRole);
         }
 
-        // POST: Submodules/Delete/5
+        // POST: AppRoles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(long id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var submodule = await _context.Submodule.FindAsync(id);
-            _context.Submodule.Remove(submodule);
+            var appRole = await _context.AppRole.FindAsync(id);
+            _context.AppRole.Remove(appRole);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SubmoduleExists(long id)
+        private bool AppRoleExists(string id)
         {
-            return _context.Submodule.Any(e => e.Id == id);
+            return _context.AppRole.Any(e => e.Id == id);
         }
     }
 }
