@@ -8,17 +8,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Oesia.Data;
 using Oesia.Models;
+using Oesia.Services;
+
 
 namespace Oesia.Controllers
 {
     public class ProjectsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly OesiaServices _services;
 
-
-        public ProjectsController(ApplicationDbContext context)
+        public ProjectsController(ApplicationDbContext context,
+                                  UserManager<AppUser> userManager, 
+                                  OesiaServices services)
         {
             _context = context;
+            _userManager = userManager;
+            _services = services;
         }
 
         // GET: Projects
@@ -70,9 +77,30 @@ namespace Oesia.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ProjectId,Description,UserId,CreateDate,StartDate,EndDate,EstimatedHours,ElapsedHours,PendingHours,Status")] Project project)
         {
+            // Get current user information
+            string userName;
+            AppUser user = await _userManager.GetUserAsync(User);
+            // Create UserID for projects's default values
+            userName = user.FirstName + " " + user.LastName;
+
+            // Create projects's default values
+            project.CreateDate = DateTime.Now;
+            project.UserId = userName;
+            project.PendingHours = project.EstimatedHours;
+            project.Status = "At risk";
+
+            // Create new obeject which links AppUsers and Projects
+            UserProject userProject = new UserProject
+            {
+                AppUsers = user,
+                Projects = project
+            };
+
+            //Insert/Update database
             if (ModelState.IsValid)
             {
                 _context.Add(project);
+                _context.UserProject.Add(userProject);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
