@@ -1,26 +1,16 @@
-﻿class ProjectsTable extends React.Component {
+﻿class ProjectInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userProjectsData: [],
-            projectsData: []
+            userProjectsData: [{ Projects }],
         };
         //this.loadDataFromServer = this.loadDataFromServer.bind(this);
     }
 
     componentDidMount() {
-        fetch('https://myapioesia.azurewebsites.net/api/projects')
-
-            .then(projectsData => projectsDate.json())
-            .then(projectsData => this.setState({ projectsDate }))
-        console.log("state", this.state.projectsDate)
-    }
-
-    componentDidMount() {
         fetch('https://myapioesia.azurewebsites.net/api/userprojects')
-
-            .then(userProjectsData => userProjectsData.json())
-            .then(userProjectsData => this.setState({ userProjectsData }))     
+        .then(userProjectsData => userProjectsData.json())
+        .then(userProjectsData => this.setState({ userProjectsData }))     
         console.log("state", this.state.userProjectsData)
     }
 
@@ -50,31 +40,21 @@
                         </tr>
                     </thead>
                     <tbody>{
+                        this.state.userProjectsData.map((item, key) => {                          
+                            return (
+                                <tr key={key}>
+                                    <td>{item.id}</td>
+                                    <td>{item.description}</td>                     
+                                    <td>
+                                        <button className="createBtn" type="button"><a href="/Edit"><b>Edit</b></a> </button>
+                                        <button className="createBtn" type="button"><a href="/Delete"><b>Delete</b></a> </button>
+                                    </td>
 
-                        this.state.projectsData.filter(function (y) {
-
-                            this.state.userProjectsData.map(function (i) {
-                                return i.projectsId;
+                                </tr>
+                                        )
+                                    })
+                                }
                             })
-                            if (i.projectsId === y.id) {
-                                console.log(i.projectsId)
-                                this.state.projectsData.map(function (item, key) {                          
-                        return (
-                            <tr key={key}>
-                                <td>{item.id}</td>
-                                <td>{item.description}</td>
-                                <td>{item.userId}</td>                        
-                                <td>
-                                    <button className="createBtn" type="button"><a href="/Edit"><b>Edit</b></a> </button>
-                                    <button className="createBtn" type="button"><a href="/Delete"><b>Delete</b></a> </button>
-                                </td>
-
-                            </tr>
-                                    )
-                                })
-                            }
-
-                        })
                     }</tbody>
                 </table>
             </div>
@@ -82,43 +62,43 @@
     }
 }
 
-class TableRowHeader extends React.Component {
-    render() {
-        return (
-            <tr>
-                <TableHeader />
-            </tr>
-        );
-    }
-}
+//class TableRowHeader extends React.Component {
+//    render() {
+//        return (
+//            <tr>
+//                <TableHeader />
+//            </tr>
+//        );
+//    }
+//}
 
-class TableRow extends React.Component {
-    render() {
-        return (
-            <tr>
-                <TableData />
-            </tr>
-        );
-    }
-}
+//class TableRow extends React.Component {
+//    render() {
+//        return (
+//            <tr>
+//                <TableData />
+//            </tr>
+//        );
+//    }
+//}
 
-class TableHeader extends React.Component {
-    render() {
-        return (
-            <th>Header</th>
-        );
-    }
-}
+//class TableHeader extends React.Component {
+//    render() {
+//        return (
+//            <th>Header</th>
+//        );
+//    }
+//}
 
-class TableData extends React.Component {
-    render() {
-        return (
-            <td>Data</td>
-        );
-    }
-}
+//class TableData extends React.Component {
+//    render() {
+//        return (
+//            <td>Data</td>
+//        );
+//    }
+//}
 
 ReactDOM.render(
-    <ProjectsTable url="/UserProjectsJson" />,
+    <ProjectInfo />,
     document.getElementById('content'),
 );
