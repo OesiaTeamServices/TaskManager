@@ -80,9 +80,18 @@
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
                 <td>
-                    <a asp-action="Play" name="id" asp-route-id="@item.Id">Play</a> |
-                    <a asp-action="Pause" name="id" asp-route-id="@item.Id">Pause</a>
-                    <a asp-action="Stop" name="id" asp-route-id="@item.Id">Stop</a>
+                    <form asp-action="Play" method="post">
+                        <input type="submit" value="&#9654;" />
+                        <input type="hidden" name="id" value="@item.Id" />
+                    </form>
+                    <form asp-action="Pause" method="post">
+                        <input type="submit" value="&#10074;&#10074;" />
+                        <input type="hidden" name="id" value="@item.Id" />
+                    </form>
+                    <form asp-action="Stop" method="post">
+                        <input type="submit" value="&#9726;" />
+                        <input type="hidden" name="id" value="@item.Id" />
+                    </form>
                 </td>
             </tr>
         }
