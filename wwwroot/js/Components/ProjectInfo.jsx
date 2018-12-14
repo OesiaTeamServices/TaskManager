@@ -8,22 +8,6 @@
         //this.loadDataFromServer = this.loadDataFromServer.bind(this);
     }
 
-    //loadDataFromServer() {
-    //    const xhr = new XMLHttpRequest();
-    //    xhr.open('get', this.props.url, true);
-    //    console.log(this.props.url)
-    //    xhr.onload = () => {
-    //        const data = JSON.parse(JSON.parse(xhr.responseText));
-    //        console.log(data);
-    //        this.setState({ data: data });
-    //    };
-    //    xhr.send();
-    //}
-
-    //componentDidMount() {
-    //    this.loadDataFromServer();
-    //}
-
     componentDidMount() {
         fetch('https://myapioesia.azurewebsites.net/api/projects')
 

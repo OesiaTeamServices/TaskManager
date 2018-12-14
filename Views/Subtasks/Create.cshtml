@@ -1,4 +1,5 @@
 @model Oesia.Models.Subtask
+@inject Oesia.Services.OesiaServices Services
 
 @{
     ViewData["Title"] = "Create";
@@ -18,6 +19,18 @@
                 <span asp-validation-for="SubtaskId" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label class="control-label">Assign it to a task</label>
+                <p></p>
+                <select asp-for="TaskId">
+                    <option value="">Choose a task...</option>
+                    @foreach (Oesia.Models.Task item in Services.GetTasksDB())
+                    {
+                    <option value="@item.Id">@item.TaskId</option>
+                    }
+                </select>
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
@@ -27,11 +40,12 @@
             <input asp-for="UserId" class="form-control" />
             <span asp-validation-for="UserId" class="text-danger"></span>
         </div>*@
-            @*<div class="form-group">
-            <label asp-for="EstimatedHours" class="control-label"></label>
-            <input asp-for="EstimatedHours" class="form-control" />
-            <span asp-validation-for="EstimatedHours" class="text-danger"></span>
-        </div>
+            <div class="form-group">
+                <label asp-for="EstimatedHours" class="control-label"></label>
+                <input asp-for="EstimatedHours" class="form-control" />
+                <span asp-validation-for="EstimatedHours" class="text-danger"></span>
+            </div>
+        @*
         <div class="form-group">
             <label asp-for="ElapsedHours" class="control-label"></label>
             <input asp-for="ElapsedHours" class="form-control" />
@@ -53,10 +67,18 @@
             <span asp-validation-for="Status" class="text-danger"></span>
         </div>*@
             <div class="form-group">
-                <select>
-                    <option></option>
-                    <option></option>
+                <label >Assign to</label>
+                <p></p>
+                <select asp-for="UserId">
+                    {
+                    <option value="null">Select a technician...</option>
+                    }
+                    @foreach (AppUser user in Services.GetUsersByRoleDB("Technician"))
+                    {
+                    <option value="@user.Id">@user.FirstName @user.LastName</option>
+                    }
                 </select>
+                <span class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

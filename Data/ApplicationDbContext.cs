@@ -21,5 +21,7 @@ namespace Oesia.Data
         public DbSet<Oesia.Models.UserProject> UserProject { get; set; }
         public DbSet<Oesia.Models.UserSubtask> UserSubtask { get; set; }
         public DbSet<Oesia.Models.UserTask> UserTask { get; set; }
+        public DbSet<Oesia.Models.AppUser> AppUser { get; set; }
+        public DbSet<Oesia.Models.AppRole> AppRole { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 @model IEnumerable<Oesia.Models.Subtask>
+@inject Oesia.Services.OesiaServices Services
 
 @{
     ViewData["Title"] = "Index";
@@ -9,12 +10,12 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<div class="btnsSubtasks">
-    <button type="button" class="playBtn">Play</button> 
-    <button type="button" class="pauseBtn">Pause</button> 
+@*<div class="btnsSubtasks">
+    <button type="button" class="playBtn">Play</button>
+    <button type="button" class="pauseBtn">Pause</button>
     <button type="button" class="stopBtn">Stop</button>
-    <button type="button" class="recordBtn">Record</button> 
-</div>
+    <button type="button" class="recordBtn">Record</button>
+</div>*@
 <table class="table">
     <thead>
         <tr>
@@ -46,38 +47,44 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubtaskId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstimatedHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ElapsedHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PendingHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Observations)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubtaskId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Services.GetNameAndSurnamesDBFromId(item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstimatedHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ElapsedHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PendingHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Observations)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+                <td>
+                    <a asp-action="Play" name="id" asp-route-id="@item.Id">Play</a> |
+                    <a asp-action="Pause" name="id" asp-route-id="@item.Id">Pause</a>
+                    <a asp-action="Stop" name="id" asp-route-id="@item.Id">Stop</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
