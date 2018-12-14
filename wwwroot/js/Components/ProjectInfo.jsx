@@ -3,17 +3,8 @@
         super(props);
         this.state = {
             userProjectsData: [],
-            projectsData: []
         };
         //this.loadDataFromServer = this.loadDataFromServer.bind(this);
-    }
-
-    componentDidMount() {
-        fetch('https://myapioesia.azurewebsites.net/api/projects')
-
-            .then(projectsData => projectsDate.json())
-            .then(projectsData => this.setState({ projectsDate }))
-        console.log("state", this.state.projectsDate)
     }
 
     componentDidMount() {
@@ -46,34 +37,24 @@
                             <th>Elapsed Hours</th>
                             <th>Pending Hours</th>
                             <th>Status</th>
-                            <th></th>
+                            <th>Edit/Delete</th>
                         </tr>
                     </thead>
                     <tbody>{
-
-                        this.state.projectsData.filter(function (y) {
-
-                            this.state.userProjectsData.map(function (i) {
-                                return i.projectsId;
-                            })
-                            if (i.projectsId === y.id) {
-                                console.log(i.projectsId)
-                                this.state.projectsData.map(function (item, key) {                          
+                        this.state.userProjectsData.map((item, key) => {                                         
                         return (
                             <tr key={key}>
                                 <td>{item.id}</td>
                                 <td>{item.description}</td>
                                 <td>{item.userId}</td>                        
                                 <td>
-                                    <button className="createBtn" type="button"><a href="/Edit"><b>Edit</b></a> </button>
+                                    <button className="createBtn" type="button"><a href="/Edit"><b>Edit</b></a></button>
                                     <button className="createBtn" type="button"><a href="/Delete"><b>Delete</b></a> </button>
                                 </td>
-
                             </tr>
                                     )
                                 })
                             }
-
                         })
                     }</tbody>
                 </table>
