@@ -16,5 +16,8 @@ namespace Oesia.Models
         public string Observations { get; set; }
         public string Status { get; set; }
         public List<UserSubtask> UserSubtasks { get; set; }
+
+        public long TaskId { get; set; }
+        public Oesia.Models.Task Task { get; set; }
     }
 }
