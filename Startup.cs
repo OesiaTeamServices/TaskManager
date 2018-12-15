@@ -32,10 +32,6 @@ namespace Oesia
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddRazorPagesOptions(options => {
-                options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddCors();
 
             //_movieApiKey = Configuration["DefaultConnection"];
