@@ -18,8 +18,6 @@
     render() {
         return (
             <div className="tableWithProjects">
-                <h1>Projects</h1>
-                <button className="createBtn" type="button"><a href="/Create"><b>Create</b></a> </button>
                 <table>
                     <colgroup span="4"></colgroup>
                     <thead>
@@ -41,13 +39,13 @@
                     </thead>
                     <tbody>{                 
                         this.state.userProjectsData.$values.map((item, key) => {
-                            if ("$id" in item) {
+                            if ("$id" in item && "Projects" !== null) {
                                 return (
                                     <tr key={key}>
-                                        <td>{item.Id}</td>
+                                        <td>{item.Id}</td>                                     
                                         <td>
-                                            <button className="createBtn" type="button"><a href="/Edit"><b>Edit</b></a> </button>
-                                            <button className="createBtn" type="button"><a href="/Delete"><b>Delete</b></a> </button>
+                                            <button className="editBtn btn btn-default" type="button"><a href="/Edit"><b>Edit</b></a> </button>
+                                            <button className="deleteBtn btn btn-default" type="button"><a href="/Delete"><b>Delete</b></a> </button>
                                         </td>
                                     </tr>
                                 )
