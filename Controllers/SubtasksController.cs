@@ -191,36 +191,45 @@ namespace Oesia.Controllers
             return _context.Subtask.Any(e => e.Id == id);
         }
 
-        [HttpPost]
+
         //PLAY 
+        [HttpPost]
         public async Task<IActionResult> Play(long id)
         {
             //_context.UserSubtask.Single()
-            AppUser currentUser = await _userManager.GetUserAsync(User);
-            UserSubtask userSubtask = _context.UserSubtask.Single(x => x.AppUsers.Id == currentUser.Id && x.Subtasks.Id == id);
-
-            /*UserSubtask sb = _context.UserSubtask.LastOrDefault(m => m.AppUsers.Id== currentUser.Id);*/
+            AppUser currentUser = new AppUser();
+            UserSubtask userSubtask = new UserSubtask();
             DateTime playtime = DateTime.Now;
+
+            currentUser = await _userManager.GetUserAsync(User);
+
+            userSubtask =  _context.UserSubtask.Single(x=>x.AppUsers.Id == currentUser.Id && x.Subtasks.Id == id);
             userSubtask.PlayTime = playtime;
+
             _context.UserSubtask.Update(userSubtask);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Subtasks", "Index");
+            return RedirectToAction("Index", "Subtasks");
         }
 
         //Pause
         public async Task<IActionResult> Pause(long id)
         {
-            //_context.UserSubtask.Single()
-            AppUser currentUser = await _userManager.GetUserAsync(User);
-            UserSubtask userSubtask = _context.UserSubtask.Single(x => x.AppUsers.Id == currentUser.Id && x.Subtasks.Id == id);
-
-            /*UserSubtask sb = _context.UserSubtask.LastOrDefault(m => m.AppUsers.Id== currentUser.Id)*/
-            ;
+            AppUser currentUser = new AppUser();
+            UserSubtask userSubtask = new UserSubtask();
             DateTime pausetime = DateTime.Now;
+            TimeSpan duration;
+
+            currentUser = await _userManager.GetUserAsync(User);
+
+            userSubtask = _context.UserSubtask.Single(x => x.AppUsers.Id == currentUser.Id && x.Subtasks.Id == id);
             userSubtask.PauseTime = pausetime;
+
+            duration = pausetime - userSubtask.PlayTime;
+            userSubtask.RecordTime = userSubtask.RecordTime.Add(duration);
+
             _context.UserSubtask.Update(userSubtask);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Subtasks", "Index");
+            return RedirectToAction("Index", "Subtasks");
         }
 
 
@@ -228,17 +237,22 @@ namespace Oesia.Controllers
 
         public async Task<IActionResult> Stop(long id)
         {
-            //_context.UserSubtask.Single()
-            AppUser currentUser = await _userManager.GetUserAsync(User);
-            UserSubtask userSubtask = _context.UserSubtask.Single(x => x.AppUsers.Id == currentUser.Id && x.Subtasks.Id == id);
-
-            /*UserSubtask sb = _context.UserSubtask.LastOrDefault(m => m.AppUsers.Id== currentUser.Id)*/
-            ;
+            AppUser currentUser = new AppUser();
+            UserSubtask userSubtask = new UserSubtask();
             DateTime stoptime = DateTime.Now;
+            TimeSpan duration;
+
+            currentUser = await _userManager.GetUserAsync(User);
+
+            userSubtask = _context.UserSubtask.Single(x => x.AppUsers.Id == currentUser.Id && x.Subtasks.Id == id);
             userSubtask.StopTime = stoptime;
+
+            duration = stoptime - userSubtask.PlayTime;
+            userSubtask.RecordTime = userSubtask.RecordTime.Add(duration);
+
             _context.UserSubtask.Update(userSubtask);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Subtasks", "Index");
+            return RedirectToAction("Index", "Subtasks");
         }
     }
 }
