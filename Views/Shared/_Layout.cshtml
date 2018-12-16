@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Oesia</title>
+    <link rel="icon" type="image/ico" href="~/images/logooesia.png"/>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -16,7 +17,7 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
-<body>
+<body class="container">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -27,60 +28,28 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
-                    @*<img id="oesiaLogo" src="http://grupooesia.com/wp-content/uploads/2015/11/logo_oesia_011.png" width="100"/>*@
+                    <img alt="Brand" src="~/images/logooesia.png" id="logooesia">
                 </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li>
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                General info
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a asp-area="" asp-controller="Projects" asp-action="Index">Projects</a></li>
-                                <li><a asp-area="" asp-controller="Modules" asp-action="Index">Modules</a></li>
-                                <li><a asp-area="" asp-controller="Submodules" asp-action="Index">Submodules</a></li>
-                                <li><a asp-area="" asp-controller="Tasks" asp-action="Index">Tasks</a></li>
-                                <li><a asp-area="" asp-controller="Subtasks" asp-action="Index">Subtasks</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Data by login
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a asp-area="" asp-controller="UserProjects" asp-action="Index">ProjectsByLogin</a></li>
-                                <li><a asp-area="" asp-controller="UserTasks" asp-action="Index">TaskByLogin</a></li>
-                                <li><a asp-area="" asp-controller="UserSubtasks" asp-action="Index">SubtaskByLogin</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Add new
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a asp-area="Identity" asp-page="/Account/Register">User</a></li>
-                                <li><a asp-area="" asp-controller="Projects" asp-action="Create">Project</a></li>
-                                <li><a asp-area="" asp-controller="Modules" asp-action="Create">Module</a></li>
-                                <li><a asp-area="" asp-controller="Submodules" asp-action="Create">Submodule</a></li>
-                                <li><a asp-area="" asp-controller="Tasks" asp-action="Create">Task</a></li>
-                                <li><a asp-area="" asp-controller="Subtasks" asp-action="Create">Subtask</a></li>
-                            </ul>
-                        </div>
-                    </li>
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>*@
+                    <li><a asp-area="" asp-controller="UserTasks" asp-action="Index">My Tasks</a></li>
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>*@
+                    <li>          
+                    <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a asp-area="Identity" asp-page="/Account/Register">User</a></li>
+                        <li><a asp-area="" asp-controller="Projects" asp-action="Create">Project</a></li>
+                        <li><a asp-area="" asp-controller="Modules" asp-action="Create">Module</a></li>
+                        <li><a asp-area="" asp-controller="Submodules" asp-action="Create">Submodule</a></li>
+                        <li><a asp-area="" asp-controller="Tasks" asp-action="Create">Task</a></li>
+                        <li><a asp-area="" asp-controller="Subtasks" asp-action="Create">Subtask</a></li>
+                    </ul>                 
                 </ul>
-                <partial name="_LoginPartial" />
+                   <partial name="_LoginPartial" />
             </div>
         </div>
     </nav>
@@ -91,7 +60,7 @@
         @RenderBody()
         <hr />
         <footer class="footerPar">
-            <p>&copy; GRUPO OESÍA 2018. ALL RIGHTS RESERVED</p>
+            <p>&copy; GRUPO OESÍA 2018. ALL RIGHTS RESERVED.</p>
         </footer>
     </div>
 

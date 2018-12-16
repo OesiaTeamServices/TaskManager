@@ -10,8 +10,8 @@ using Oesia.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Oesia.Models;
-using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
-using JavaScriptEngineSwitcher.ChakraCore;
+//using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
+//using JavaScriptEngineSwitcher.ChakraCore;
 using Oesia.Services;
 
 namespace Oesia
@@ -30,8 +30,8 @@ namespace Oesia
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName)
-        .AddChakraCore();
+        //    services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName)
+        //.AddChakraCore();
             //_movieApiKey = Configuration["DefaultConnection"];
             services.Configure<CookiePolicyOptions>(options =>
             {

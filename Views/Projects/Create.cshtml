@@ -4,12 +4,10 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
-
-<h4>Project</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3">
+        <h2>Create New Project</h2>
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -67,11 +65,10 @@
                 @*<a class="btn btn-default" asp-area="" asp-controller="Modules" asp-action="Create">Add Module</a>*@
             </div>
         </form>
+        <div>
+            <a asp-action="Index">Back to List Of Projects</a>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
