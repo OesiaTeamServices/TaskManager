@@ -44,7 +44,7 @@
                             if ("$id" in item) {
                                 return (
                                     <tr key={key}>
-                                        <td>{item.AppUsers.UserName}</td>
+                                        <td>{item.Id}</td>
                                         <td>
                                             <button className="createBtn" type="button"><a href="/Edit"><b>Edit</b></a> </button>
                                             <button className="createBtn" type="button"><a href="/Delete"><b>Delete</b></a> </button>
@@ -54,14 +54,15 @@
                             } else {
                                 return null;
                             }
-                            })   
-                        }
+                        })
+                    }
                     </tbody>
                 </table>
             </div>
         );
     }
 }
+
 
 ReactDOM.render(
     <ProjectInfo />,
