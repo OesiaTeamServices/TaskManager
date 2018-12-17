@@ -2,20 +2,18 @@
     constructor(props) {
         super(props);
         this.state = {
-            userProjectsData: { $values: [] },
-            query: '',
-            filteredProjects: []
+            userProjectsData: { $values: [] }
         };
-        //this.handleUpdateQuery = this.handleUpdateQuery.bind(this);
         //this.loadDataFromServer = this.loadDataFromServer.bind(this);
     }
 
     componentDidMount() {
         fetch('https://myapioesia.azurewebsites.net/api/userprojects')
             .then(userProjectsData => userProjectsData.json())
-            .then(userProjectsData => this.setState({ userProjectsData }))     
+            .then(userProjectsData => this.setState({ userProjectsData }))
         console.log("state", this.state.userProjectsData)
     }
+
 
     render() {
         return (
@@ -33,30 +31,30 @@
                             <th>Estimated Hours</th>
                             <th>Elapsed Hours</th>
                             <th>Pending Hours</th>
-                            <th>Status</th>               
+                            <th>Status</th>
                             <th>Progress Bar</th>
                         </tr>
                     </thead>
-                    <tbody>{                 
+                    <tbody>{
                         this.state.userProjectsData.$values.map((item, key) => {
                             if (("$id" in item) && (item.Projects !== null) && (item.Projects.Module !== null)) {
                                 return (
                                     <tr key={key}>
-                                        <td>{item.Id}</td>    
-                                        <td>{item.Projects.ProjectId}</td>      
-                                        <td>{item.Projects.UserId}</td> 
-                                        <td>{item.Projects.CreateDate}</td> 
-                                        <td>{item.Projects.StartDate}</td> 
-                                        <td>{item.Projects.EndDate}</td> 
-                                        <td>{item.Projects.EstimatedHours}</td> 
-                                        <td>{item.Projects.ElapsedHours}</td>                                     
-                                        <td>{item.Projects.PendingHours}</td>      
-                                        <td>{item.Projects.Status}</td> 
+                                        <td>{item.Id}</td>
+                                        <td>{item.Projects.ProjectId}</td>
+                                        <td>{item.Projects.UserId}</td>
+                                        <td>{item.Projects.CreateDate}</td>
+                                        <td>{item.Projects.StartDate}</td>
+                                        <td>{item.Projects.EndDate}</td>
+                                        <td>{item.Projects.EstimatedHours}</td>
+                                        <td>{item.Projects.ElapsedHours}</td>
+                                        <td>{item.Projects.PendingHours}</td>
+                                        <td>{item.Projects.Status}</td>
                                         <td>
-                                            <div className="progress">
-                                                <div className="progress-bar" role="progressbar" aria-valuenow="70"
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="70"
                                                     aria-valuemin="0" aria-valuemax="100">
-                                                    <span className="sr-only">70% Complete</span>
+                                                    <span class="sr-only">70% Complete</span>
                                                 </div>
                                             </div>
                                         </td>
@@ -80,6 +78,6 @@
 
 
 ReactDOM.render(
-    <ProjectInfo />,
+    <ProjectDeatils />,
     document.getElementById('content'),
 );

@@ -191,10 +191,13 @@ thead {
 }
 
 /************************************Buttons**********************************************************/
+.progress-bar {
+    width: 70%;
+}
 
-
-
-
+button.editBtn.btn.btn-default a, button.deleteBtn.btn.btn-default a {
+    color: #7a1f5e;
+}
 /*******************************************media queries*************************************************/
 @media screen and (min-width: 800px) {
     img#carousel1.img-responsive, img#carousel2.img-responsive, img#carousel3.img-responsive {
