@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using Oesia.Services;
 
 namespace Oesia.Controllers
 {
+    [Authorize]
     public class SubtasksController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -52,6 +54,7 @@ namespace Oesia.Controllers
         }
 
         // GET: Subtasks/Create
+        [Authorize(Roles = "Project manager,Task manager")]
         public IActionResult Create()
         {
             return View();
@@ -60,6 +63,7 @@ namespace Oesia.Controllers
         // POST: Subtasks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Project manager,Task manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,SubtaskId,Description,UserId,EstimatedHours,ElapsedHours,PendingHours,Observations,Status,TaskId,UserId")] Subtask subtask)
@@ -92,6 +96,7 @@ namespace Oesia.Controllers
         }
 
         // GET: Subtasks/Edit/5
+        [Authorize(Roles = "Project manager,Task manager")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -110,6 +115,7 @@ namespace Oesia.Controllers
         // POST: Subtasks/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Project manager,Task manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("Id,SubtaskId,Description,UserId,EstimatedHours,ElapsedHours,PendingHours,Observations,Status,TaskId,UserId")] Subtask subtask )
@@ -158,6 +164,7 @@ namespace Oesia.Controllers
         }
 
         // GET: Subtasks/Delete/5
+        [Authorize(Roles = "Project manager,Task manager")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -176,6 +183,7 @@ namespace Oesia.Controllers
         }
 
         // POST: Subtasks/Delete/5
+        [Authorize(Roles = "Project manager,Task manager")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
@@ -193,6 +201,7 @@ namespace Oesia.Controllers
 
 
         //PLAY 
+        [Authorize(Roles = "Technician")]
         [HttpPost]
         public async Task<IActionResult> Play(long id)
         {
@@ -278,6 +287,7 @@ namespace Oesia.Controllers
         }
 
         //Pause
+        [Authorize(Roles = "Technician")]
         public async Task<IActionResult> Pause(long id)
         {
             //Storing the time used fro the task
@@ -377,7 +387,7 @@ namespace Oesia.Controllers
 
 
         //STOP
-
+        [Authorize(Roles = "Technician")]
         public async Task<IActionResult> Stop(long id)
         {
             AppUser currentUser = new AppUser();
