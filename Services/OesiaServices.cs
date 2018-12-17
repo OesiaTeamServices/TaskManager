@@ -151,5 +151,83 @@ namespace Oesia.Services
             }
             return "";
         }
+
+        public void UpdateSubtaskTimes(long subtaskId, string userId)
+        {
+            Subtask currentSubtask = _context.Subtask.Single(x => x.Id == subtaskId);
+            UserSubtask currentUserSubtask = _context.UserSubtask.Single(x => x.AppUsers.Id == userId && x.Subtasks.Id == subtaskId);
+
+            double timeConsumed = (currentUserSubtask.RecordTime.Hour / 1.00);
+            timeConsumed += (currentUserSubtask.RecordTime.Minute / 60.00);
+            timeConsumed += (currentUserSubtask.RecordTime.Second / 3600.00);
+            currentSubtask.ElapsedHours = timeConsumed;
+            currentSubtask.PendingHours = currentSubtask.EstimatedHours - timeConsumed;
+
+            _context.Subtask.Update(currentSubtask);
+        }
+
+        public void UpdateTaskTimes(long taskId)
+        {
+            Models.Task currentTask = _context.Task.Single(x => x.Id == taskId);
+
+            double sumOfElapsedTimes = 0.0;
+            foreach (Subtask subtask in currentTask.Subtasks)
+            {
+                sumOfElapsedTimes += subtask.ElapsedHours;
+            }
+
+            currentTask.ElapsedHours = sumOfElapsedTimes;
+            currentTask.PendingHours = currentTask.EstimatedHours - sumOfElapsedTimes;
+
+            _context.Task.Update(currentTask);
+        }
+
+        public void UpdateSubmoduleTimes(long submoduleId)
+        {
+            Submodule currentSubmodule = _context.Submodule.Single(x => x.Id == submoduleId);
+
+            double sumOfElapsedTimes = 0.0;
+            foreach (Models.Task task in currentSubmodule.Tasks)
+            {
+                sumOfElapsedTimes += task.ElapsedHours;
+            }
+
+            currentSubmodule.ElapsedHours = sumOfElapsedTimes;
+            currentSubmodule.PendingHours = currentSubmodule.EstimatedHours - sumOfElapsedTimes;
+
+            _context.Submodule.Update(currentSubmodule);
+        }
+
+        public void UpdateModuleTimes(long moduleId)
+        {
+            Module currentModule = _context.Module.Single(x => x.Id == moduleId);
+
+            double sumOfElapsedTimes = 0.0;
+            foreach (Submodule submodule in currentModule.Submodules)
+            {
+                sumOfElapsedTimes += submodule.ElapsedHours;
+            }
+
+            currentModule.ElapsedHours = sumOfElapsedTimes;
+            currentModule.PendingHours = currentModule.EstimatedHours - sumOfElapsedTimes;
+
+            _context.Module.Update(currentModule);
+        }
+
+        public void UpdateProjectTimes(long projectId)
+        {
+            Project currentProject = _context.Project.Single(x => x.Id == projectId);
+
+            double sumOfElapsedTimes = 0.0;
+            foreach (Module module in currentProject.Modules)
+            {
+                sumOfElapsedTimes += module.ElapsedHours;
+            }
+
+            currentProject.ElapsedHours = sumOfElapsedTimes;
+            currentProject.PendingHours = currentProject.EstimatedHours - sumOfElapsedTimes;
+
+            _context.Project.Update(currentProject);
+        }
     }
 }
