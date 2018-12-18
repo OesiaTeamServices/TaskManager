@@ -4,123 +4,126 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<div class="headerDetails">
+    <h2>Subtasks</h2>
+</div>
 
-<p>
-    <a asp-action="Create">Create New Task</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            @*<th>
-            @Html.DisplayNameFor(model => model.PlayTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PauseTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StopTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RecordTime)
-        </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.Subtasks.SubtaskId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subtasks.Description)
-            </th>
-            @*<th>
-            @Html.DisplayNameFor(model => model.Subtasks.UserId)
-        </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.Subtasks.EstimatedHours)
-            </th>
-            @*<th>
-            @Html.DisplayNameFor(model => model.Subtasks.ElapsedHours)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Subtasks.PendingHours)
-        </th>*@
-            <th>
-                Progress
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subtasks.Observations)
-            </th>
-            @*<th>
-            @Html.DisplayNameFor(model => model.Subtasks.Status)
-        </th>*@
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.PlayTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PauseTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StopTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RecordTime)
-        </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Subtasks.SubtaskId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subtasks.Description)
-            </td>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.Subtasks.UserId)
-        </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Subtasks.EstimatedHours)
-            </td>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.Subtasks.ElapsedHours)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Subtasks.PendingHours)
-        </td>*@
-            <td>
-                <div className="progress">
-                    <div className="progress-bar" role="progressbar" aria-valuenow="70"
-                         aria-valuemin="0" aria-valuemax="100">
-                        <span className="sr-only">70% Complete</span>
-                    </div>
-                </div>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subtasks.Observations)
-            </td>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.Subtasks.Status)
-        </td>*@
-            <td>
-                <form asp-action="Play" method="post">
-                    <input type="submit" value="&#9654;" />
-                    <input type="hidden" name="id" value="@item.Subtasks.Id" />
-                </form>
-                <form asp-action="Pause" method="post">
-                    <input type="submit" value="&#10074;&#10074;" />
-                    <input type="hidden" name="id" value="@item.Subtasks.Id" />
-                </form>
-                <form asp-action="Stop" method="post">
-                    <input type="submit" value="&#9726;" />
-                    <input type="hidden" name="id" value="@item.Subtasks.Id" />
-                </form>
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    @*<p>
+        <a asp-action="Create">Create New Task</a>
+    </p>*@
+    <table class="table">
+        <thead>
+            <tr>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.PlayTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PauseTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StopTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RecordTime)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Subtasks.SubtaskId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subtasks.Description)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Subtasks.UserId)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Subtasks.EstimatedHours)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Subtasks.ElapsedHours)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Subtasks.PendingHours)
+                    </th>*@
+                <th>
+                    Progress
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subtasks.Observations)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Subtasks.Status)
+                    </th>*@
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.PlayTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PauseTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StopTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RecordTime)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subtasks.SubtaskId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subtasks.Description)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Subtasks.UserId)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subtasks.EstimatedHours)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Subtasks.ElapsedHours)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Subtasks.PendingHours)
+                        </td>*@
+                    <td>
+                        <div className="progress">
+                            <div className="progress-bar" role="progressbar" aria-valuenow="70"
+                                 aria-valuemin="0" aria-valuemax="100">
+                                <span className="sr-only">70% Complete</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subtasks.Observations)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Subtasks.Status)
+                        </td>*@
+                    <td>
+                        <form asp-action="Play" method="post">
+                            <input type="submit" value="&#9654;" />
+                            <input type="hidden" name="id" value="@item.Subtasks.Id" />
+                        </form>
+                        <form asp-action="Pause" method="post">
+                            <input type="submit" value="&#10074;&#10074;" />
+                            <input type="hidden" name="id" value="@item.Subtasks.Id" />
+                        </form>
+                        <form asp-action="Stop" method="post">
+                            <input type="submit" value="&#9726;" />
+                            <input type="hidden" name="id" value="@item.Subtasks.Id" />
+                        </form>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

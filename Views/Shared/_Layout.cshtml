@@ -32,27 +32,31 @@
                 </a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>*@
-                    <li><a asp-area="" asp-controller="UserProjects" asp-action="Index">My Projects</a></li>
-                    <li><a asp-area="" asp-controller="UserTasks" asp-action="Index">My Tasks</a></li>
-                    <li><a asp-area="" asp-controller="UserSubtasks" asp-action="Index">My Subtasks</a></li>
-                    <li>
-                        <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a asp-area="Identity" asp-page="/Account/Register">User</a></li>
-                            <li><a asp-area="" asp-controller="Projects" asp-action="Create">Project</a></li>
-                            <li><a asp-area="" asp-controller="Modules" asp-action="Create">Module</a></li>
-                            <li><a asp-area="" asp-controller="Submodules" asp-action="Create">Submodule</a></li>
-                            <li><a asp-area="" asp-controller="Tasks" asp-action="Create">Task</a></li>
-                            <li><a asp-area="" asp-controller="Subtasks" asp-action="Create">Subtask</a></li>
+               @{ if (User.Identity.IsAuthenticated)
+                   {
+                        <ul class="nav navbar-nav">
+                            @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>*@
+                            <li><a asp-area="" asp-controller="UserProjects" asp-action="Index">Projects</a></li>
+                            <li><a asp-area="" asp-controller="UserTasks" asp-action="Index">Tasks</a></li>
+                            <li><a asp-area="" asp-controller="UserSubtasks" asp-action="Index">Subtasks</a></li>
+                            <li>
+                                <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a asp-area="Identity" asp-page="/Account/Register">User</a></li>
+                                    <li><a asp-area="" asp-controller="Projects" asp-action="Create">Project</a></li>
+                                    <li><a asp-area="" asp-controller="Modules" asp-action="Create">Module</a></li>
+                                    <li><a asp-area="" asp-controller="Submodules" asp-action="Create">Submodule</a></li>
+                                    <li><a asp-area="" asp-controller="Tasks" asp-action="Create">Task</a></li>
+                                    <li><a asp-area="" asp-controller="Subtasks" asp-action="Create">Subtask</a></li>
+                                </ul>
                         </ul>
-                </ul>
-                   <partial name="_LoginPartial" />
+                       }
+                   }
+                <partial name="_LoginPartial" />
             </div>
-        </div>
+    </div>
     </nav>
 
     <partial name="_CookieConsentPartial" />

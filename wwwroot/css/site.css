@@ -211,42 +211,103 @@ button.editBtn.btn.btn-default a, button.deleteBtn.btn.btn-default a {
 .footerPar p {
     opacity :1;
 }*/
-/*******************************************media queries*************************************************/
-@media screen and (min-width: 800px) {
-    img#carousel1.img-responsive, img#carousel2.img-responsive, img#carousel3.img-responsive {
-        width: 1300px;
-        height: 450px;
-    }
 
-.carousel-caption {
-    right: 20%;
-    left: 20%;
-    padding-bottom: 90px;
-}
+/******************************************Tabs**************************************************************/
+
+.headerDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
 
-@media screen and (max-width: 767px) {
-
-    img#carousel1.img-responsive, img#carousel2.img-responsive, img#carousel3.img-responsive {
-        width: 400px;
-        height: 200px;
-    }
-
-    .carousel-caption p {
-        font-size: 20px;
-        margin: 25px;
-    }
+div.presentationBlock {
+    padding: 25px 10px 5px 20px;
+    /*background-color: #f3d2ea;*/
+    /*background-color: #7a1f5e;
+    opacity: 0.5;*/
 }
 
-@media screen and (max-width: 400px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
+span.titlePresentation {
+    font-weight: bolder;
+    color: #7a1f5e;
+}
+
+ul.nav.nav-tabs {
+    background-color: #fbeff7;
+}
+
+.nav-tabs > li.active > a {
+    background-color: #fbeff7;
+}
+
+.nav-tabs > li > a{
+    background-color: white;
+}
+
+div.progress-bar {
+    background-color: red;
+    width: 40px;
+}
+
+div.progress-bar {
+    background-color: red;
+    width: 40px;
+}
+
+div.progress-bar.details{
+    background-color: darkorange;
+    width: 70px;
+}
+
+.progress{
+    background-color: white;
+    width: 200px;
+}
+.nav-tabs > li > a {
+    color: #7a1f5e;
+}
+
+/**************************************************Text*********************************************************/
+a {
+    color: #7a1f5e;
+}
+    /*******************************************media queries*************************************************/
+    @media screen and (min-width: 800px) {
+        img#carousel1.img-responsive, img#carousel2.img-responsive, img#carousel3.img-responsive {
+            width: 1300px;
+            height: 450px;
+        }
+
+        .carousel-caption {
+            right: 20%;
+            left: 20%;
+            padding-bottom: 90px;
+        }
     }
 
-    img#carousel1.img-responsive, img#carousel2.img-responsive, img#carousel3.img-responsive {
-        width: 100vw;
-        height: 50vh;
+    @media screen and (max-width: 767px) {
+
+        img#carousel1.img-responsive, img#carousel2.img-responsive, img#carousel3.img-responsive {
+            width: 400px;
+            height: 200px;
+        }
+
+        .carousel-caption p {
+            font-size: 20px;
+            margin: 25px;
+        }
     }
-}
+
+    @media screen and (max-width: 400px) {
+        /* Hide captions */
+        .carousel-caption {
+            display: none;
+        }
+
+        img#carousel1.img-responsive, img#carousel2.img-responsive, img#carousel3.img-responsive {
+            width: 100vw;
+            height: 50vh;
+        }
+    }
 

@@ -3,19 +3,20 @@
     @{
     ViewData["Title"] = "Index";
     }
+<div class="headerDetails">
+    <h2>Projects</h2>
+</div>
 
-<h2>Projects</h2>
-
-<p>
-    <a asp-area="" asp-controller="Projects" asp-action="Create">Create New Project</a>
-</p>
+    @*<p>
+        <a asp-area="" asp-controller="Projects" asp-action="Create">Create New Project</a>
+    </p>*@
 
     <div id="content"></div>
 
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.0/umd/react.development.js"></script>
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.0/umd/react-dom.development.js"></script>
 
-<script>
+    <script>
     let username = "@Model.FirstOrDefault().AppUsers.Id";
-</script>
-<script src='@Url.Content("~/js/Components/ProjectInfo.jsx")'></script>
+    </script>
+    <script src='@Url.Content("~/js/Components/ProjectInfo.jsx")'></script>
