@@ -1,4 +1,4 @@
-﻿class ProjectInfo extends React.Component {
+﻿class ProjectDetails extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,67 +17,49 @@
 
     render() {
         return (
-            <div className="tableWithProjects">
-                <table>
-                    <colgroup span="4"></colgroup>
-                    <thead>
-                        <tr>
-                            <th>Project ID</th>
-                            <th>Description</th>
-                            <th>Project Manager</th>
-                            <th>Create Date</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Estimated Hours</th>
-                            <th>Elapsed Hours</th>
-                            <th>Pending Hours</th>
-                            <th>Status</th>
-                            <th>Progress Bar</th>
-                        </tr>
-                    </thead>
-                    <tbody>{
-                        this.state.userProjectsData.$values.map((item, key) => {
-                            if (("$id" in item) && (item.Projects !== null) && (item.Projects.Module !== null)) {
-                                return (
-                                    <tr key={key}>
-                                        <td>{item.Id}</td>
-                                        <td>{item.Projects.ProjectId}</td>
-                                        <td>{item.Projects.UserId}</td>
-                                        <td>{item.Projects.CreateDate}</td>
-                                        <td>{item.Projects.StartDate}</td>
-                                        <td>{item.Projects.EndDate}</td>
-                                        <td>{item.Projects.EstimatedHours}</td>
-                                        <td>{item.Projects.ElapsedHours}</td>
-                                        <td>{item.Projects.PendingHours}</td>
-                                        <td>{item.Projects.Status}</td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                                                    aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">70% Complete</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button className="editBtn btn btn-default" type="button"><a href="/Edit"><b>Edit</b></a> </button>
-                                            <button className="deleteBtn btn btn-default" type="button"><a href="/Delete"><b>Delete</b></a> </button>
-                                        </td>
-                                    </tr>
-                                )
+            <ul className="nav nav-tabs">
+                <li role="presentation" className="active">
+                    <a href="#">General Info</a>
+                    {
+                        this.state.userProjectsData.$values.filter((item, username) => {
+                            if (("$id" in item) && (item.Projects !== null) && (item.AppUsersId !== null)) {
+                                return item.AppUsersId === "67591114-9549-4001-b505-fb8652ca3f15";
+                                console.log(username);
+                                console.log(item.AppUsersId);
                             } else {
                                 return null;
                             }
+
                         })
+                            .map((item, key) => {
+                                return (
+                                    <div key={key}>
+                                    <p>{item.AppUsersId}</p>
+                                    <p>{item.Projects.ProjectId}</p>
+                                    <p>{item.Projects.UserId}</p>
+                                    <p>{item.Projects.CreateDate}</p>
+                                    <p>item.Projects.StartDate}</p>
+                                    <p>{item.Projects.EndDate}</p>
+                                    <p>{item.Projects.EstimatedHours}</p>
+                                    <p>{item.Projects.ElapsedHours}</p>
+                                    <p>{item.Projects.PendingHours}</p>
+                                    <p>{item.Projects.Status}</p>
+                                    </div>
+                                )
+                            })
                     }
-                    </tbody>
-                </table>
-            </div>
+                </li>
+                <li role="presentation"><a href="#">Modules</a></li>
+                <li role="presentation"><a href="#">Submodules</a></li>
+                <li role="presentation"><a href="#">Tasks</a></li>
+                <li role="presentation"><a href="#">Subtasks</a></li>
+            </ul>
         );
     }
 }
 
 
 ReactDOM.render(
-    <ProjectDeatils />,
+    <ProjectDetails />,
     document.getElementById('content'),
 );

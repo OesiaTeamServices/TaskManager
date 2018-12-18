@@ -27,15 +27,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Tasks.Priority)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tasks.CreateDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tasks.EstimatedStartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tasks.EstimatedEndDate)
-            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.Tasks.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tasks.EstimatedStartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tasks.EstimatedEndDate)
+        </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Tasks.RealStartDate)
             </th>
@@ -45,15 +45,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.Tasks.EstimatedHours)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tasks.ElapsedHours)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tasks.PendingHours)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tasks.Status)
-            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.Tasks.ElapsedHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tasks.PendingHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tasks.Status)
+        </th>*@
+            <th>Progress</th>
             <th></th>
         </tr>
     </thead>
@@ -103,6 +104,14 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Tasks.Status)
+            </td>
+            <td>
+                <div className="progress">
+                    <div className="progress-bar" role="progressbar" aria-valuenow="70"
+                         aria-valuemin="0" aria-valuemax="100">
+                        <span className="sr-only">70% Complete</span>
+                    </div>
+                </div>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

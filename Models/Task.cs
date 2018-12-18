@@ -7,6 +7,7 @@ namespace Oesia.Models
     public class Task
     {
         public long Id { get; set; }
+        [Display(Name = "ID")]
         public string TaskId { get; set; }
         public string Description { get; set; }
         public string UserId { get; set; }
@@ -16,8 +17,11 @@ namespace Oesia.Models
         public DateTime CreateDate { get; set; }
         public DateTime EstimatedStartDate { get; set; }
         public DateTime EstimatedEndDate { get; set; }
+        [Display(Name = "Start Day")]
         public DateTime RealStartDate { get; set; }
+        [Display(Name = "End Day")]
         public DateTime RealEndDate { get; set; }
+        [Display(Name = "Time Est. (h) ")]
         public double EstimatedHours { get; set; }
         public double ElapsedHours { get; set; }
         public double PendingHours { get; set; }

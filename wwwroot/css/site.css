@@ -65,10 +65,11 @@ table, th, td {
     border: 1px solid black;
 }
 
+/********************************************NavBar***************************************/
 .navbar {
     height: 80px;
     background-color: white;
-    border-bottom: 0.2vw solid #7a1f5e;
+    border-bottom: 0.4vw solid #7a1f5e;
 }
 
 .navbar-inverse .navbar-toggle {
@@ -198,6 +199,18 @@ thead {
 button.editBtn.btn.btn-default a, button.deleteBtn.btn.btn-default a {
     color: #7a1f5e;
 }
+
+/**************************************Footer****************************************************************/
+/*.footerPar {
+    margin:auto 0 ;
+    height: 80px;
+    opacity:0.5;
+    width: 100vw;
+    background-color: #7a1f5e;
+}
+.footerPar p {
+    opacity :1;
+}*/
 /*******************************************media queries*************************************************/
 @media screen and (min-width: 800px) {
     img#carousel1.img-responsive, img#carousel2.img-responsive, img#carousel3.img-responsive {

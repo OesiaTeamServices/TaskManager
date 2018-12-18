@@ -2,6 +2,7 @@
     constructor(props) {
         super(props);
         this.state = {
+            //userGlobal: username,
             userProjectsData: { $values: [] },
             query: '',
             filteredProjects: []
@@ -13,7 +14,7 @@
     componentDidMount() {
         fetch('https://myapioesia.azurewebsites.net/api/userprojects')
             .then(userProjectsData => userProjectsData.json())
-            .then(userProjectsData => this.setState({ userProjectsData }))     
+            .then(userProjectsData => this.setState({ userProjectsData }))
         console.log("state", this.state.userProjectsData)
     }
 
@@ -26,32 +27,30 @@
                         <tr>
                             <th>Project ID</th>
                             <th>Description</th>
-                            <th>Project Manager</th>
-                            <th>Create Date</th>
                             <th>Start Date</th>
                             <th>End Date</th>
-                            <th>Estimated Hours</th>
-                            <th>Elapsed Hours</th>
-                            <th>Pending Hours</th>
-                            <th>Status</th>               
+                            <th>Time Est. (h)</th>                          
                             <th>Progress Bar</th>
                         </tr>
                     </thead>
-                    <tbody>{                 
-                        this.state.userProjectsData.$values.map((item, key) => {
-                            if (("$id" in item) && (item.Projects !== null) && (item.Projects.Module !== null)) {
+                    <tbody>{
+                        this.state.userProjectsData.$values.filter((item, userGlobal) => {
+                            if (("$id" in item) && (item.Projects !== null) && (item.AppUsersId !== null)) {
+                                return item.AppUsersId === username;
+                                console.log(userGlobal);
+                                console.log(item.AppUsersId);
+                            } else {
+                                return null;
+                            }
+                        })                     
+                            .map((item, key) => {
                                 return (
                                     <tr key={key}>
-                                        <td>{item.Id}</td>    
-                                        <td>{item.Projects.ProjectId}</td>      
-                                        <td>{item.Projects.UserId}</td> 
-                                        <td>{item.Projects.CreateDate}</td> 
-                                        <td>{item.Projects.StartDate}</td> 
-                                        <td>{item.Projects.EndDate}</td> 
-                                        <td>{item.Projects.EstimatedHours}</td> 
-                                        <td>{item.Projects.ElapsedHours}</td>                                     
-                                        <td>{item.Projects.PendingHours}</td>      
-                                        <td>{item.Projects.Status}</td> 
+                                        <td>{item.Projects.ProjectId}</td>
+                                        <td>{item.Projects.Description}</td>
+                                        <td>{item.Projects.StartDate}</td>
+                                        <td>{item.Projects.EndDate}</td>
+                                        <td>{item.Projects.EstimatedHours}</td>
                                         <td>
                                             <div className="progress">
                                                 <div className="progress-bar" role="progressbar" aria-valuenow="70"
@@ -66,10 +65,8 @@
                                         </td>
                                     </tr>
                                 )
-                            } else {
-                                return null;
-                            }
-                        })
+                            })
+                           
                     }
                     </tbody>
                 </table>
