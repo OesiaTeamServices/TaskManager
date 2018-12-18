@@ -12,7 +12,22 @@ namespace Oesia.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            if(User.IsInRole("Project manager"))
+            {
+                return RedirectToAction("Index", "UserProjects");
+            }
+            else if(User.IsInRole("Task manager"))
+            {
+                return RedirectToAction("Index", "UserTasks");
+            }
+            else if (User.IsInRole("Technician"))
+            {
+                return RedirectToAction("Index", "UserSubtasks");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult About()

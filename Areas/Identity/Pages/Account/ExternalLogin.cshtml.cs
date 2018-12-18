@@ -136,6 +136,7 @@ namespace Oesia.Areas.Identity.Pages.Account
             LoginProvider = info.LoginProvider;
             ReturnUrl = returnUrl;
             return Page();
+
         }
     }
 }
