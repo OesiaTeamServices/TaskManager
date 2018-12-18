@@ -160,8 +160,13 @@ namespace Oesia.Services
             double timeConsumed = (currentUserSubtask.RecordTime.Hour / 1.00);
             timeConsumed += (currentUserSubtask.RecordTime.Minute / 60.00);
             timeConsumed += (currentUserSubtask.RecordTime.Second / 3600.00);
+            timeConsumed = Math.Round(timeConsumed, 2);
             currentSubtask.ElapsedHours = timeConsumed;
             currentSubtask.PendingHours = currentSubtask.EstimatedHours - timeConsumed;
+            if (currentSubtask.PendingHours < 0)
+            {
+                currentSubtask.PendingHours = 0;
+            }
 
             _context.Subtask.Update(currentSubtask);
         }
@@ -178,7 +183,10 @@ namespace Oesia.Services
 
             currentTask.ElapsedHours = sumOfElapsedTimes;
             currentTask.PendingHours = currentTask.EstimatedHours - sumOfElapsedTimes;
-
+            if (currentTask.PendingHours < 0)
+            {
+                currentTask.PendingHours = 0;
+            }
             _context.Task.Update(currentTask);
         }
 
@@ -194,6 +202,10 @@ namespace Oesia.Services
 
             currentSubmodule.ElapsedHours = sumOfElapsedTimes;
             currentSubmodule.PendingHours = currentSubmodule.EstimatedHours - sumOfElapsedTimes;
+            if (currentSubmodule.PendingHours < 0)
+            {
+                currentSubmodule.PendingHours = 0;
+            }
 
             _context.Submodule.Update(currentSubmodule);
         }
@@ -210,6 +222,10 @@ namespace Oesia.Services
 
             currentModule.ElapsedHours = sumOfElapsedTimes;
             currentModule.PendingHours = currentModule.EstimatedHours - sumOfElapsedTimes;
+            if (currentModule.PendingHours < 0)
+            {
+                currentModule.PendingHours = 0;
+            }
 
             _context.Module.Update(currentModule);
         }
@@ -226,6 +242,10 @@ namespace Oesia.Services
 
             currentProject.ElapsedHours = sumOfElapsedTimes;
             currentProject.PendingHours = currentProject.EstimatedHours - sumOfElapsedTimes;
+            if (currentProject.PendingHours < 0)
+            {
+                currentProject.PendingHours = 0;
+            }
 
             _context.Project.Update(currentProject);
         }
