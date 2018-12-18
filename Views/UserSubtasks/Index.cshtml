@@ -88,10 +88,10 @@
             @Html.DisplayFor(modelItem => item.Subtasks.PendingHours)
         </td>*@
             <td>
-                <div className="progress">
-                    <div className="progress-bar" role="progressbar" aria-valuenow="70"
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="70"
                          aria-valuemin="0" aria-valuemax="100">
-                        <span className="sr-only">70% Complete</span>
+                        <span class="sr-only">70% Complete</span>
                     </div>
                 </div>
             </td>
@@ -104,21 +104,20 @@
             <td>
                 <form asp-action="Play" method="post">
                     <input type="submit" value="&#9654;" />
-                    <input type="hidden" name="id" value="@item.Subtasks.Id" />
+                    <input type="hidden" name="id" value="@item.Id" />
                 </form>
                 <form asp-action="Pause" method="post">
                     <input type="submit" value="&#10074;&#10074;" />
-                    <input type="hidden" name="id" value="@item.Subtasks.Id" />
+                    <input type="hidden" name="id" value="@item.Id" />
                 </form>
                 <form asp-action="Stop" method="post">
                     <input type="submit" value="&#9726;" />
-                    <input type="hidden" name="id" value="@item.Subtasks.Id" />
+                    <input type="hidden" name="id" value="@item.Id" />
                 </form>
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <button class="editBtn btn btn-default" type="button"><a asp-action="Edit" asp-route-id="@item.Id"><span class="glyphicon glyphicon-pencil"></span></a> </button>
+                <button class="deleteBtn btn btn-default" type="button"><a asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-remove"></span></a> </button>
             </td>
         </tr>
 }
