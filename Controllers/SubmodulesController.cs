@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using Oesia.Models;
 
 namespace Oesia.Controllers
 {
+    [Authorize]
     public class SubmodulesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -44,6 +46,7 @@ namespace Oesia.Controllers
         }
 
         // GET: Submodules/Create
+        [Authorize(Roles = "Project manager")]
         public IActionResult Create()
         {
             return View();
@@ -52,6 +55,7 @@ namespace Oesia.Controllers
         // POST: Submodules/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Project manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,SubmoduleId,Description,EstimatedHours,ElapsedHours,PendingHours,Status,ModuleId")] Submodule submodule)
@@ -69,6 +73,7 @@ namespace Oesia.Controllers
         }
 
         // GET: Submodules/Edit/5
+        [Authorize(Roles = "Project manager")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -87,6 +92,7 @@ namespace Oesia.Controllers
         // POST: Submodules/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Project manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("Id,SubmoduleId,Description,EstimatedHours,ElapsedHours,PendingHours,Status,ModuleId")] Submodule submodule)
@@ -120,6 +126,7 @@ namespace Oesia.Controllers
         }
 
         // GET: Submodules/Delete/5
+        [Authorize(Roles = "Project manager")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -138,6 +145,7 @@ namespace Oesia.Controllers
         }
 
         // POST: Submodules/Delete/5
+        [Authorize(Roles = "Project manager")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using Oesia.Services;
 
 namespace Oesia.Controllers
 {
+    [Authorize]
     public class TasksController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -28,6 +30,7 @@ namespace Oesia.Controllers
         }
 
         // GET: Tasks
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Task.ToListAsync());
@@ -52,6 +55,7 @@ namespace Oesia.Controllers
         }
 
         // GET: Tasks/Create
+        [Authorize(Roles = "Project manager,Task manager")]
         public IActionResult Create()
         {
             return View();
@@ -60,6 +64,7 @@ namespace Oesia.Controllers
         // POST: Tasks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Project manager,Task manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TaskId,Description,Type,Criticality,Priority,CreateDate,EstimatedStartDate,EstimatedEndDate,RealStartDate,RealEndDate,EstimatedHours,ElapsedHours,PendingHours,Status,SubmoduleId,UserId")] Oesia.Models.Task task)
@@ -93,6 +98,7 @@ namespace Oesia.Controllers
         }
 
         // GET: Tasks/Edit/5
+        [Authorize(Roles = "Project manager,Task manager")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
@@ -111,6 +117,7 @@ namespace Oesia.Controllers
         // POST: Tasks/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Project manager,Task manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("Id,TaskId,Description,Type,Criticality,Priority,CreateDate,EstimatedStartDate,EstimatedEndDate,RealStartDate,RealEndDate,EstimatedHours,ElapsedHours,PendingHours,Status,SubmoduleId,UserId")] Oesia.Models.Task task )
@@ -159,6 +166,7 @@ namespace Oesia.Controllers
         }
 
         // GET: Tasks/Delete/5
+        [Authorize(Roles = "Project manager,Task manager")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null)
@@ -177,6 +185,7 @@ namespace Oesia.Controllers
         }
 
         // POST: Tasks/Delete/5
+        [Authorize(Roles = "Project manager,Task manager")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
