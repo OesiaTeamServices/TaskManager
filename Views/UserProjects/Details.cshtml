@@ -4,8 +4,9 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Project's Details</h2>
-
+<div class="headerDetails">
+     <h2>Project's Details</h2>
+</div>
 <div>
     <hr />
     <dl class="dl-horizontal"></dl>
@@ -20,5 +21,5 @@
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.0/umd/react-dom.development.js"></script>
 
 <script src="@Url.Content("~/js/Components/ProjectDetails.jsx")">
-     @*var username = @Model.First().AppUsers.Id;*@
+    @*let username = "@Model.FirstOrDefault().AppUsers.Id";*@
 </script>

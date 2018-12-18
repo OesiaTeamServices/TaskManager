@@ -23,7 +23,7 @@
                     {
                         this.state.userProjectsData.$values.filter((item, username) => {
                             if (("$id" in item) && (item.Projects !== null) && (item.AppUsersId !== null)) {
-                                return item.AppUsersId === "67591114-9549-4001-b505-fb8652ca3f15";
+                                return item.AppUsersId === "1b34f4e6-3072-4f56-bc0b-309f7da777b9";
                                 console.log(username);
                                 console.log(item.AppUsersId);
                             } else {
@@ -33,26 +33,32 @@
                         })
                             .map((item, key) => {
                                 return (
-                                    <div key={key}>
-                                    <p>{item.AppUsersId}</p>
-                                    <p>{item.Projects.ProjectId}</p>
-                                    <p>{item.Projects.UserId}</p>
-                                    <p>{item.Projects.CreateDate}</p>
-                                    <p>item.Projects.StartDate}</p>
-                                    <p>{item.Projects.EndDate}</p>
-                                    <p>{item.Projects.EstimatedHours}</p>
-                                    <p>{item.Projects.ElapsedHours}</p>
-                                    <p>{item.Projects.PendingHours}</p>
-                                    <p>{item.Projects.Status}</p>
+                                    <div key={key} className="presentationBlock">
+                                        <p><span className="titlePresentation">ID:</span> {item.Projects.ProjectId}</p>
+                                        <p><span className="titlePresentation">Project Manager:</span> {item.Projects.UserId}</p>
+                                        <p><span className="titlePresentation">Create Date:</span> {item.Projects.CreateDate}</p>
+                                        <p><span className="titlePresentation">Start Day:</span> {item.Projects.StartDate}</p>
+                                        <p><span className="titlePresentation">End day:</span> {item.Projects.EndDate}</p>
+                                        <p><span className="titlePresentation">Time Est. (h):</span> {item.Projects.EstimatedHours}</p>
+                                        <p><span className="titlePresentation">Progress:</span>
+                                        <div className="progress">
+                                            <div className="progress-bar details" role="progressbar" aria-valuenow="70"
+                                            aria-valuemin="0" aria-valuemax="100">
+                                                <span className="sr-only"></span>20%
+                                            </div>
+                                        </div>
+                                    </p>
+                                        <p><span className="titlePresentation">Project Status:</span> {item.Projects.Status}</p>
                                     </div>
                                 )
                             })
-                    }
+                }
                 </li>
                 <li role="presentation"><a href="#">Modules</a></li>
                 <li role="presentation"><a href="#">Submodules</a></li>
                 <li role="presentation"><a href="#">Tasks</a></li>
                 <li role="presentation"><a href="#">Subtasks</a></li>
+                <li role="presentation"><a href="#">Calendar</a></li>
             </ul>
         );
     }

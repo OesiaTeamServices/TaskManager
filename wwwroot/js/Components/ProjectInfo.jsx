@@ -53,9 +53,10 @@
                                         <td>{item.Projects.EstimatedHours}</td>
                                         <td>
                                             <div className="progress">
-                                                <div className="progress-bar" role="progressbar" aria-valuenow="70"
+                                                <div className="progress-bar" role="progressbar" aria-valuenow="20"
                                                     aria-valuemin="0" aria-valuemax="100">
-                                                    <span className="sr-only">70% Complete</span>
+                                                    <span className="sr-only"></span>
+                                                    20%
                                                 </div>
                                             </div>
                                         </td>
