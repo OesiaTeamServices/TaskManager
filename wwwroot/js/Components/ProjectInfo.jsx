@@ -60,8 +60,8 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <button className="editBtn btn btn-default" type="button"><a href="/Edit"><b>Edit</b></a> </button>
-                                            <button className="deleteBtn btn btn-default" type="button"><a href="/Delete"><b>Delete</b></a> </button>
+                                            <button className="editBtn btn btn-default" type="button"><a href="/Edit"><span className="glyphicon glyphicon-pencil"></span></a> </button>
+                                            <button className="deleteBtn btn btn-default" type="button"><a href="/Delete"><span className="glyphicon glyphicon-remove"></span></a> </button>
                                         </td>
                                     </tr>
                                 )

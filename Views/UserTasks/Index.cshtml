@@ -78,7 +78,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Tasks.Priority)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Tasks.CreateDate)
             </td>
             <td>
@@ -86,7 +86,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Tasks.EstimatedEndDate)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Tasks.RealStartDate)
             </td>
@@ -96,7 +96,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Tasks.EstimatedHours)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Tasks.ElapsedHours)
             </td>
             <td>
@@ -104,12 +104,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Tasks.Status)
-            </td>
+            </td>*@
             <td>
-                <div className="progress">
-                    <div className="progress-bar" role="progressbar" aria-valuenow="70"
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="70"
                          aria-valuemin="0" aria-valuemax="100">
-                        <span className="sr-only">70% Complete</span>
+                        <span class="sr-only">70% Complete</span>
                     </div>
                 </div>
             </td>
