@@ -44,7 +44,7 @@
                                         <div className="progress">
                                             <div className="progress-bar details" role="progressbar" aria-valuenow="70"
                                             aria-valuemin="0" aria-valuemax="100">
-                                                <span className="sr-only"></span>20%
+                                                <span className="sr-only"></span>40%
                                             </div>
                                         </div>
                                     </p>
