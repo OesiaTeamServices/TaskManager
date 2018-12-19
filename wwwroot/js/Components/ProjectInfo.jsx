@@ -31,6 +31,7 @@
                             <th>End Date</th>
                             <th>Time Est. (h)</th>                          
                             <th>Progress Bar</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>{

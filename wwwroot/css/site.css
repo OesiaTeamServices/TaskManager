@@ -43,11 +43,11 @@ body {
     }
 }
 
-.footerPar{
-    position:fixed;
-    position:center;
-    bottom: 0%;
-}
+/*.footerPar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}*/
 
 hr{
     position: fixed;
@@ -66,7 +66,13 @@ table, th, td {
 }
 
 /********************************************NavBar***************************************/
-.navbar {
+
+.dropdown-menu > li > a:hover {
+    background-color: #7a1f5e;
+    color: white;
+}
+
+    .navbar {
     height: 80px;
     background-color: white;
     border-bottom: 0.4vw solid #7a1f5e;
@@ -201,14 +207,15 @@ button.editBtn.btn.btn-default a, button.deleteBtn.btn.btn-default a {
 }
 
 /**************************************Footer****************************************************************/
-/*.footerPar {
-    margin:auto 0 ;
-    height: 80px;
-    opacity:0.5;
-    width: 100vw;
-    background-color: #7a1f5e;
+.footerPar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    right:0;
 }
-.footerPar p {
+
+/*.footerPar p {
     opacity :1;
 }*/
 
@@ -257,7 +264,7 @@ div.progress-bar {
 
 div.progress-bar.details{
     background-color: darkorange;
-    width: 70px;
+    width: 80px;
 }
 
 .progress{
